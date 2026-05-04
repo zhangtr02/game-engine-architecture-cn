@@ -34,7 +34,7 @@ u = (1/L)L is a unit vector in the direction of L.
 
 ![Figure 5.27](../../assets/images/volume-01/chapter-05/figure-5-27-parametric-equation-of-a-line-segment.png)
 
-**图 5.27** 使用归一化参数 `t` 表示的线段参数方程。
+**Figure 5.27.** 使用归一化参数 `t` 表示的线段参数方程。
 
 ### 5.6.2 球体
 
@@ -48,7 +48,7 @@ u = (1/L)L is a unit vector in the direction of L.
 
 ![Figure 5.28](../../assets/images/volume-01/chapter-05/figure-5-28-point-radius-representation-of-a-sphere.png)
 
-**图 5.28** 球体的点-半径表示。
+**Figure 5.28.** 球体的点-半径表示。
 
 ### 5.6.3 平面
 
@@ -64,7 +64,7 @@ Ax + By + Cz + D = 0.
 
 ![Figure 5.29](../../assets/images/volume-01/chapter-05/figure-5-29-plane-in-point-normal-form.png)
 
-**图 5.29** 点-法线形式的平面。
+**Figure 5.29.** 点-法线形式的平面。
 
 有趣的是，当传统平面方程中的参数 `A`、`B` 和 `C` 被解释为一个 3D 向量时，该向量的方向正是平面法线方向。如果向量 `[ A  B  C ]` 被归一化为单位长度，那么归一化后的向量 `[ a  b  c ] = n`，而归一化后的参数：
 
@@ -146,7 +146,7 @@ Pz ≥ zmin and Pz ≤ zmax.
 
 ![Figure 5.30](../../assets/images/volume-01/chapter-05/figure-5-30-frustum.png)
 
-**图 5.30** 一个视锥体。
+**Figure 5.30.** 一个视锥体。
 
 视锥体的一种方便表示方式是六个平面的数组，其中每个平面都用点-法线形式表示（也就是每个平面一个点和一个法向量）。
 

@@ -32,6 +32,8 @@ void Thread2()
 
 ![图 4.34：左图：深色箭头表示当前由线程持有的资源。浅色虚线箭头表示正在等待资源变为可用的线程。右图：我们可以去掉资源，只画线程之间的依赖关系（浅色虚线箭头）。如果线程依赖图中存在环，就表示发生了 deadlock。](../../assets/images/volume-01/chapter-04/figure-4-34-thread-resource-dependency-graph-deadlock.png)
 
+**Figure 4.34.** 左图：深色箭头表示当前由线程持有的资源。浅色虚线箭头表示正在等待资源变为可用的线程。右图：我们可以去掉资源，只画线程之间的依赖关系（浅色虚线箭头）。如果线程依赖图中存在环，就表示发生了 deadlock。
+
 其实，仅仅依赖图中存在一个 cycle，还不足以产生 deadlock。严格来说，deadlock 有四个必要且充分条件，称为 Coffman conditions（Coffman 条件）：
 
 1. **Mutual exclusion（互斥）**。单个线程可以通过 mutex lock 获得对单个资源的独占访问权。

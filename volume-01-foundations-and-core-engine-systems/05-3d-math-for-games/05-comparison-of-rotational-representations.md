@@ -118,11 +118,11 @@ N_DOF = N_parameters − N_constraints.     (5.10)
 
 ![Figure 5.25](../../assets/images/volume-01/chapter-05/figure-5-25-parametric-equation-of-a-line.png)
 
-**图 5.25** 直线的参数方程。
+**Figure 5.25.** 直线的参数方程。
 
 ![Figure 5.26](../../assets/images/volume-01/chapter-05/figure-5-26-parametric-equation-of-a-ray.png)
 
-**图 5.26** 射线的参数方程。
+**Figure 5.26.** 射线的参数方程。
 
 - **欧拉角**（Euler Angles）。3 个参数 − 0 个约束 = 3 DOF。
 - **轴 + 角**（Axis+Angle）。4 个参数 − 1 个约束 = 3 DOF。  
@@ -131,3 +131,5 @@ N_DOF = N_parameters − N_constraints.     (5.10)
   约束：四元数被约束为单位长度。
 - **3 × 3 矩阵**（3 × 3 Matrix）。9 个参数 − 6 个约束 = 3 DOF。  
   约束：所有三行和所有三列都必须具有单位长度（当作三元素向量来看时），<sup>2</sup> 并且列与列、行与行必须相互正交。
+
+> **脚注 2**：向量长度上的六个约束只会移除五个自由度，因为行和列彼此相互依赖。不过，第六个自由度会由正交性约束移除。

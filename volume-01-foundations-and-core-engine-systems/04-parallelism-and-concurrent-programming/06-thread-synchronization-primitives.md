@@ -289,15 +289,15 @@ semaphore 的 API 通常由以下函数组成：
 
 3. `take()` 或 `wait()`：如果某个 semaphore 封装的计数器值大于零，该函数会递减计数器并立即返回。如果它的计数器值当前为零，该函数会 block（阻塞，使线程进入睡眠），直到 semaphore 的计数器再次上升到零以上。
 
-4. `give()`、`post()` 或 `signal()`：将封装的计数器值加一，从而为另一个线程打开一个 “slot”，使其能够 `take()` 该 semaphore。如果某个线程当前正睡眠等待该 semaphore，那么调用 `give()` 时，该线程会从它对 `take()` 或 `wait()` 的调用中被唤醒。[^7]
+4. `give()`、`post()` 或 `signal()`：将封装的计数器值加一，从而为另一个线程打开一个 “slot”，使其能够 `take()` 该 semaphore。如果某个线程当前正睡眠等待该 semaphore，那么调用 `give()` 时，该线程会从它对 `take()` 或 `wait()` 的调用中被唤醒。<sup>7</sup>
 
-> [^7]: 当你阅读关于 semaphores 的资料时，可能会发现有些作者使用函数名 `p()` 和 `v()`，而不是 `wait()` 和 `signal()`。这两个字母来自这两个操作的荷兰语名称。
+> **脚注 7**：当你阅读关于 semaphores 的资料时，可能会发现有些作者使用函数名 `p()` 和 `v()`，而不是 `wait()` 和 `signal()`。这两个字母来自这两个操作的荷兰语名称。
 
 因此，为了实现一个最多可由 N 个线程同时访问的 resource pool（资源池），我们只需创建一个 semaphore，并将它的计数器初始化为 N。线程通过调用 `take()` 获得资源池的访问权；当它完成工作后，通过调用 `give()` 释放对资源池的占用。
 
 当 semaphore 的计数大于零时，我们说该 semaphore 是 signaled（已触发信号）的；当它的计数器等于零时，它是 nonsignaled（未触发信号）的。这就是为什么在某些 API 中，获取和释放 semaphore 的函数分别被命名为 `wait()` 和 `signal()`：如果线程调用该函数时 semaphore 并未处于 signaled 状态，那么线程就会 wait（等待）该 semaphore 变为 signaled。
 
-#### 4.6.4.1 Mutex 与二元信号量
+#### 4.6.4.1 互斥量与二元信号量
 
 初始值设为 1 的 semaphore 称为 binary semaphore（二元信号量）。人们可能会以为 binary semaphore 与 mutex 完全相同。确实，这两个对象都只允许一个线程在某个时刻获得它。
 

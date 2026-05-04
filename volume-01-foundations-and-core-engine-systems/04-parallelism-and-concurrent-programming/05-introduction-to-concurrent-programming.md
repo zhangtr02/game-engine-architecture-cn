@@ -70,7 +70,7 @@ inline void IncrementCount()
 
 ![Table 4.1 Example of correct operation of a simple two-threaded concurrent program](../../assets/images/volume-01/chapter-04/table-4-1-correct-operation-of-simple-two-threaded-concurrent-program.png)
 
-**表 4.1** 简单双线程并发程序正确运行的示例。首先，线程 A 读取共享变量的内容，将该值递增，然后把结果写回共享变量。稍后，线程 B 执行相同步骤。共享变量的最终值按预期为 2。
+**Table 4.1.** 简单双线程并发程序正确运行的示例。首先，线程 A 读取共享变量的内容，将该值递增，然后把结果写回共享变量。稍后，线程 B 执行相同步骤。共享变量的最终值按预期为 2。
 
 如果你为 Intel x86 CPU 编译这段代码，并查看其反汇编，它可能看起来像这样：
 
@@ -88,23 +88,23 @@ mov   [g_count],eax  ; write EAX back into g_count
 
 ![Table 4.2 Example of a race condition](../../assets/images/volume-01/chapter-04/table-4-2-example-of-a-race-condition.png)
 
-**表 4.2** race condition（竞态条件）的示例。线程 A 读取共享变量的值，但随后被线程 B 抢占，线程 B 也读取了同一个值。等两个线程都递增该值并把结果写回共享变量时，全局变量中保存的是错误值 1，而不是期望值 2。
+**Table 4.2.** 竞态条件示例。线程 A 读取共享变量的值，但随后被线程 B 抢占，线程 B 也读取了同一个值。等两个线程都递增该值并把结果写回共享变量时，全局变量中保存的是错误值 1，而不是期望值 2。
 
 如果我们在并行硬件上运行这两个线程，也可能出现类似 bug，尽管理由稍有不同。和单核场景一样，我们可能会走运：两个 read-modify-write 操作可能根本不会重叠，那么结果就是正确的。然而，如果两个 read-modify-write 操作发生重叠，无论是彼此错开还是完全同步，两个线程最终都可能把同一个 `g_count` 值加载到各自的 EAX 寄存器中。二者都会递增该值，也都会把它写回内存。一个线程会覆盖另一个线程的结果，但这并不重要，因为它们都加载了同一个初始值，所以 `g_count` 的最终值会是错误的，就像单核场景中一样。图 4.27 展示了三种 data race 场景：preemption（抢占）、offset overlap（错位重叠）和 perfect synchronization（完全同步）。
 
 ![Figure 4.27 Three ways in which a data race can occur within a read-modify-write operation](../../assets/images/volume-01/chapter-04/figure-4-27-three-ways-data-race-can-occur-within-read-modify-write-operation.png)
 
-**图 4.27** read-modify-write 操作中可能发生 data race 的三种方式。上：两个线程在单个 CPU 核心上竞争。中：两个线程在两个独立核心上重叠执行，并错开一个指令。下：两个线程在两个核心上完全同步地重叠执行。
+**Figure 4.27.** read-modify-write 操作中可能发生 data race 的三种方式。上：两个线程在单个 CPU 核心上竞争。中：两个线程在两个独立核心上重叠执行，并错开一个指令。下：两个线程在两个核心上完全同步地重叠执行。
 
 ![Figure 4.28 Relative ordering of steps in a multithreaded program](../../assets/images/volume-01/chapter-04/figure-4-28-relative-ordering-of-steps-in-multithreaded-program.png)
 
-**图 4.28** 因为算法中的每个步骤都需要有限时间才能完成，所以在多线程程序中回答这些步骤之间的相对顺序会变得困难。例如，操作 B 是发生在操作 C 之前还是之后？
+**Figure 4.28.** 因为算法中的每个步骤都需要有限时间才能完成，所以在多线程程序中回答这些步骤之间的相对顺序会变得困难。例如，操作 B 是发生在操作 C 之前还是之后？
 
 ### 4.5.4 关键操作与原子性
 
-每当一个操作被另一个操作中断时，就可能产生 data race bug。不过，并不是所有中断都会真正导致 bug。例如，如果一个线程正在一块只能被该线程 “seen”（看到）的数据上执行操作，就不会发生 data race。这样的操作可以在任意时刻被其他任何操作中断，而不会造成后果。同样，如果一个数据对象上的操作被另一个不同对象上的操作中断，那么这两个操作也无法相互干扰，因而不可能出现 data race bug。[^6] Data race bug 只会在一个 shared object（共享对象）上的操作被另一个作用于 same object（同一对象）的操作中断时发生。因此，只有相对于某个特定共享数据对象，我们才能有意义地讨论 data race。
+每当一个操作被另一个操作中断时，就可能产生 data race bug。不过，并不是所有中断都会真正导致 bug。例如，如果一个线程正在一块只能被该线程 “seen”（看到）的数据上执行操作，就不会发生 data race。这样的操作可以在任意时刻被其他任何操作中断，而不会造成后果。同样，如果一个数据对象上的操作被另一个不同对象上的操作中断，那么这两个操作也无法相互干扰，因而不可能出现 data race bug。<sup>6</sup> Data race bug 只会在一个 shared object（共享对象）上的操作被另一个作用于 same object（同一对象）的操作中断时发生。因此，只有相对于某个特定共享数据对象，我们才能有意义地讨论 data race。
 
-> [^6]: 严格来说，只有当这两个对象位于不同 cache lines（缓存行）中时，这才成立。
+> **脚注 6**：严格来说，只有当这两个对象位于不同 cache lines（缓存行）中时，这才成立。
 
 我们使用 critical operation（关键操作）一词来指代任何可能读取或修改某个特定共享对象的操作。为了保证该共享对象不受 data race bug 影响，我们必须确保它的所有 critical operations 都不会相互中断。当一个 critical operation 以这种方式变得不可中断时，它就称为 atomic operation（原子操作）。换句话说，我们也可以说这样的操作具有 atomicity（原子性）。
 
@@ -124,11 +124,11 @@ mov   [g_count],eax  ; write EAX back into g_count
 
 ![Figure 4.29 Critical operation partitioned into preamble critical and postamble sections](../../assets/images/volume-01/chapter-04/figure-4-29-critical-operation-partitioned-into-preamble-critical-and-postamble-sections.png)
 
-**图 4.29** 任何包含 critical operation 的代码片段都可以划分为三个部分。critical operation 本身以上方的 invocation 为边界，以下方的 response 为边界。
+**Figure 4.29.** 任何包含 critical operation 的代码片段都可以划分为三个部分。critical operation 本身以上方的 invocation 为边界，以下方的 response 为边界。
 
 ![Figure 4.30 Assembly code partitioned into preamble critical and postamble sections](../../assets/images/volume-01/chapter-04/figure-4-30-assembly-code-partitioned-into-preamble-critical-and-postamble-sections.png)
 
-**图 4.30** 另一个示例，这次是汇编语言代码：一个代码片段被划分为三个部分，其边界由 critical operation 的 invocation 和 response 确定。
+**Figure 4.30.** 另一个示例，这次是汇编语言代码：一个代码片段被划分为三个部分，其边界由 critical operation 的 invocation 和 response 确定。
 
 #### 4.5.4.2 原子性的定义
 
@@ -147,7 +147,7 @@ mov   [g_count],eax  ; write EAX back into g_count
 
 ![Figure 4.31 Atomic and non-atomic critical operations](../../assets/images/volume-01/chapter-04/figure-4-31-atomic-and-non-atomic-critical-operations.png)
 
-**图 4.31** 上：critical operation A 可以被认为已经原子执行，因为它没有被同一 shared object 上任何其他 critical operation 的 invocation 或 response 中断。下：critical operation A 非原子执行的三种场景，因为它被同一对象上另一个 critical operation 的 invocation 和/或 response 中断了。
+**Figure 4.31.** 上：critical operation A 可以被认为已经原子执行，因为它没有被同一 shared object 上任何其他 critical operation 的 invocation 或 response 中断。下：critical operation A 非原子执行的三种场景，因为它被同一对象上另一个 critical operation 的 invocation 和/或 response 中断了。
 
 #### 4.5.4.3 使操作变为原子操作
 
@@ -161,13 +161,13 @@ mutexes 属于操作系统提供的一组并发工具，这些工具称为 threa
 
 ![Figure 4.32 Operations performed by multiple threads can overlap without atomicity](../../assets/images/volume-01/chapter-04/figure-4-32-operations-performed-by-multiple-threads-can-overlap-without-atomicity.png)
 
-**图 4.32** 如果没有 atomicity，多个线程执行的操作可能会以不可预测的方式在时间上重叠。
+**Figure 4.32.** 如果没有 atomicity，多个线程执行的操作可能会以不可预测的方式在时间上重叠。
 
 不过，使操作具有 atomicity 可以保证同一时刻永远只有一个线程在执行它。这会产生 serializing（序列化）操作的效果：原本混乱重叠的一堆操作，会被转换成有序的 atomic operations 序列。让一个操作具有 atomicity，并不能让我们控制这些操作最终以什么顺序排列；我们只能确定它们会按某种 sequential order（顺序）执行。图 4.33 展示了这一思想。
 
 ![Figure 4.33 Mutex lock-unlock pairs force operations to execute sequentially](../../assets/images/volume-01/chapter-04/figure-4-33-mutex-lock-unlock-pairs-force-operations-to-execute-sequentially.png)
 
-**图 4.33** 通过把每个 critical operation 包装在一对 mutex lock-unlock 操作中，我们强制这些操作 sequentially（顺序地）执行。
+**Figure 4.33.** 通过把每个 critical operation 包装在一对 mutex lock-unlock 操作中，我们强制这些操作 sequentially（顺序地）执行。
 
 #### 4.5.4.5 以数据为中心的一致性模型
 
