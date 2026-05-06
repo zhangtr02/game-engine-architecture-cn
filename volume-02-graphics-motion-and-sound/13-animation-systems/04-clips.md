@@ -116,24 +116,24 @@
 给定这些信息，我们可以使用以下两个关系式，从任意全局时间 $\tau$ 映射到对应的局部时间 $t$，反之亦然：
 
 $$
-t = (\tau - \tau_{\text{start}})R,
+t = (\tau - \tau_{\mathrm{start}})R,
 \tag{13.2}
 $$
 
 $$
-\tau = \tau_{\text{start}} + \frac{1}{R}t.
+\tau = \tau_{\mathrm{start}} + \frac{1}{R}t
 $$
 
 如果动画不循环（$N = 1$），那么在使用 $t$ 从片段中采样姿态之前，应该将 $t$ 钳制到有效范围 $[0, T]$ 中：
 
 $$
-t = \operatorname{clamp}\left[(\tau - \tau_{\text{start}})R\right]_0^T.
+t = \mathrm{clamp}\left[(\tau - \tau_{\mathrm{start}})R\right]_0^T
 $$
 
 如果动画永远循环（$N = \infty$），那么我们会通过将结果除以持续时间 $T$ 后取**余数**（remainder），把 $t$ 带回有效范围。这可以通过**模运算符**（mod，或 C/C++ 中的 `%`）完成，如下所示：
 
 $$
-t = \left((\tau - \tau_{\text{start}})R\right) \bmod T.
+t = \left((\tau - \tau_{\mathrm{start}})R\right) \bmod T
 $$
 
 如果片段循环有限次数（$1 < N < \infty$），那么必须先将 $t$ 钳制到范围 $[0, NT]$，然后再对这个结果按 $T$ 取模，以便将 $t$ 带入采样片段的有效范围：
@@ -141,9 +141,9 @@ $$
 $$
 t =
 \left(
-\operatorname{clamp}\left[(\tau - \tau_{\text{start}})R\right]_0^{NT}
+\mathrm{clamp}\left[(\tau - \tau_{\mathrm{start}})R\right]_0^{NT}
 \right)
-\bmod T.
+\bmod T
 $$
 
 大多数游戏引擎会直接使用局部动画时间线，而不会直接使用全局时间线。不过，直接以全局时间的方式工作也有一些非常有用的好处。首先，它会让动画同步变得非常简单。
