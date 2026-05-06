@@ -10,6 +10,7 @@
 
 材质也由美术人员在工具阶段定义。这包括为每个材质选择着色器、选择该着色器所需的纹理，并指定每个着色器的配置参数和选项。纹理会被映射到曲面上，其他顶点属性也会被定义；这些工作通常通过在 DCC 应用程序中使用某种直观工具来“绘制”完成。
 
+<a id="figure-1242"></a>
 ![Figure 12.42. NVIDIA® Nsight™ Visual Studio Edition allows shader programs to be written, previsualized and debugged easily.](../../assets/images/volume-02/chapter-12/figure-12-42-nvidia-nsight-visual-studio-edition.png)
 
 **Figure 12.42.** NVIDIA® Nsight™ Visual Studio Edition 允许用户方便地编写、预览和调试着色器程序。
@@ -20,6 +21,7 @@
 
 材质可以随各个网格一起存储和管理。然而，这可能导致数据和工作量的重复。在许多游戏中，可以用相对较少数量的材质来定义游戏中的大量对象。例如，我们可以定义一些标准的、可复用的材质，如木材、岩石、金属、塑料、布料、皮肤等。没有必要在每个网格内部都重复这些材质。相反，许多游戏团队会建立一个材质库供选择，而各个网格则以一种松耦合的方式引用这些材质。
 
+<a id="figure-1243"></a>
 ![Figure 12.43. The Unreal Engine 4 Material Editor.](../../assets/images/volume-02/chapter-12/figure-12-43-unreal-engine-4-material-editor.png)
 
 **Figure 12.43.** Unreal Engine 4 材质编辑器。
@@ -42,6 +44,7 @@
 
 PIX 用户界面如 Figure 12.44 所示。关于 PIX 的更多信息，见 [297]。Razor GPU 的文档作为 PlayStation SDK 的一部分提供，但遗憾的是，如果没有 PlayStation 开发者许可证，无法在线获取。
 
+<a id="figure-1244"></a>
 ![Figure 12.44. One of many views available in the PIX user interface.](../../assets/images/volume-02/chapter-12/figure-12-44-pix-user-interface-view.png)
 
 **Figure 12.44.** PIX 用户界面中可用的众多视图之一。

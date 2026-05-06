@@ -301,6 +301,7 @@ $$
 
 作为一个更复杂手势的例子，我们来看如何检测玩家是否正在顺时针旋转左拇指摇杆。我们可以很容易地做到这一点：将可能的二维摇杆位置范围划分为象限，如图 9.14 所示。在顺时针旋转中，摇杆依次经过左上象限、右上象限、右下象限，最后是左下象限。我们可以把每一种情况都当作一次按钮按下，并用上面序列检测代码的稍微修改版本来检测一次完整旋转。这个练习留给读者完成。试试看！
 
+<a id="figure-914"></a>
 ![Figure 9.14 Detecting circular rotations of the stick by dividing the 2D range of stick inputs into quadrants.](../../assets/images/volume-01/chapter-09/figure-9-14-detecting-circular-stick-rotations-by-quadrants.png)
 
 **Figure 9.14.** 通过将摇杆输入的二维范围划分为象限，检测摇杆的圆周旋转。

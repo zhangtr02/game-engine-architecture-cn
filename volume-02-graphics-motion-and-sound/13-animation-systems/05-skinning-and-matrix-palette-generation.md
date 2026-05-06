@@ -41,12 +41,14 @@ struct SkinnedVertex
 
 现在考虑一个绑定到该关节的单个顶点。在绑定姿态中，它的模型空间位置为 $\mathbf{v}_M^B$。蒙皮过程会计算该顶点在当前姿态中的新模型空间位置 $\mathbf{v}_M^C$。Figure 13.28 展示了这一过程。
 
+<a id="figure-1328"></a>
 ![Figure 13.28. Bind pose and current pose of a simple, one-joint skeleton and a single vertex bound to that joint.](../../assets/images/volume-02/chapter-13/figure-13-28-bind-pose-current-pose-one-joint-skeleton-vertex.png)
 
 **Figure 13.28.** 一个简单单关节骨架的绑定姿态和当前姿态，以及绑定到该关节的单个顶点。
 
 为给定关节寻找蒙皮矩阵的“诀窍”在于认识到：当一个绑定到关节的顶点用**该关节的坐标空间**表达时，它的位置是恒定的。因此，我们取顶点在绑定姿态中的模型空间位置，将其转换到关节空间中，把关节移动到其当前姿态，最后再把顶点转换回模型空间。从模型空间到关节空间再返回模型空间的这一往返过程，其净效果就是把顶点从绑定姿态“变形”（morph）到当前姿态。
 
+<a id="figure-1329"></a>
 ![Figure 13.29. By transforming a vertex’s position into joint space, it can be made to “track” the joint’s movements.](../../assets/images/volume-02/chapter-13/figure-13-29-transform-vertex-into-joint-space-track-joint-movement.png)
 
 **Figure 13.29.** 通过将顶点位置变换到关节空间中，可以让它“跟随”关节的运动。

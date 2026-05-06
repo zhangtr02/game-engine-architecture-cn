@@ -14,6 +14,7 @@ $$
 
 当然，声音是一种动态现象——声压会随时间变化。我们可以将瞬时声压绘制为时间的函数，即 $p_{\text{inst}}(t)$。在**信号处理理论**（signal processing theory）中，像这样随时间变化的函数被称为**信号**（signal）；信号处理理论是支撑数字音频技术几乎所有方面的数学基础。Figure 15.1 展示了一个典型的声波信号 $p(t)$，它围绕平均大气压上下振荡。
 
+<a id="figure-151"></a>
 ![Figure 15.1. A signal p(t) can be used to model the time-varying acoustic pressure of a sound.](../../assets/images/volume-02/chapter-15/figure-15-1-sound-pressure-signal.png)
 
 **Figure 15.1.** 信号 $p(t)$ 可用于建模声音随时间变化的声压。
@@ -22,6 +23,7 @@ $$
 
 当一种乐器演奏一个持续而稳定的长音时，得到的声压信号是**周期性的**（periodic），这意味着波形由一种重复模式组成，而这种模式具有该特定乐器的特征。任意重复模式的**周期** $T$ 描述的是连续两次出现该模式之间经过的最小时间量。例如，对于正弦声波而言，周期度量的是连续两个波峰或波谷之间的时间间隔。在 SI 单位制中，周期通常以秒（s）为单位。Figure 15.2 对此进行了说明。
 
+<a id="figure-152"></a>
 ![Figure 15.2. The period T of an arbitrary periodic signal is the minimum time between repeated patterns in the waveform.](../../assets/images/volume-02/chapter-15/figure-15-2-period-of-periodic-signal.png)
 
 **Figure 15.2.** 任意周期信号的周期 $T$ 是波形中重复模式之间的最小时间间隔。
@@ -60,6 +62,7 @@ $$
 
 Figure 15.3 展示了相位的概念。
 
+<a id="figure-153"></a>
 ![Figure 15.3. The sine and cosine functions are just phase-shifted versions of one another.](../../assets/images/volume-02/chapter-15/figure-15-3-sine-cosine-phase-shift.png)
 
 **Figure 15.3.** 正弦函数和余弦函数只是彼此相移后的版本。
@@ -162,6 +165,7 @@ $$
 
 人耳对不同频率声波的响应并不相同。人耳在 2 到 5 kHz 的频率范围内最为敏感。随着频率降低到该范围以下或升高到该范围以上，需要越来越大的声强（即压力）才能产生相同的“响度”感知。
 
+<a id="figure-154"></a>
 ![Figure 15.4. The human ear is most sensitive in the frequency range between 2 and 5 kHz. As the frequency decreases or increases beyond this range, more and more acoustic pressure is required to produce the same perception of “loudness.”](../../assets/images/volume-02/chapter-15/figure-15-4-equal-loudness-contours.png)
 
 **Figure 15.4.** 人耳在 2 到 5 kHz 的频率范围内最为敏感。随着频率低于或高于该范围，需要越来越大的声压才能产生相同的“响度”感知。
@@ -212,6 +216,7 @@ $$
 
 Figure 15.5 展示了几种声音辐射模式。
 
+<a id="figure-155"></a>
 ![Figure 15.5. Three types of sound sources and their sound radiation patterns (in two dimensions for ease of illustration). From left to right: omnidirectional, conical and directional.](../../assets/images/volume-02/chapter-15/figure-15-5-sound-radiation-patterns.png)
 
 **Figure 15.5.** 三种声源及其声音辐射模式（为便于说明，以二维形式展示）。从左到右依次为：全向、锥形和定向。
@@ -246,6 +251,7 @@ Figure 15.5 展示了几种声音辐射模式。
 - **早期反射（回声）**（early reflections/echo）。通过间接路径抵达听者的声波，在到达前会被周围表面反射并部分吸收，因此由于路径更长，需要更长时间才能到达听者。因此，直达声波的到达与反射声波的到达之间会存在**延迟**（delay）。最先到达人耳的一组反射声波通常只与一两个表面发生过相互作用。因此，它们是相对“干净”的信号，我们会把它们感知为声音的不同新“副本”，即**回声**（echoes）。
 - **晚期混响（尾音）**（late reverberations/tail）。一旦声波在听音空间中反弹了数次以上，它们就会彼此叠加并相互干涉，以至于大脑不再能检测出清晰独立的回声。这些被称为晚期混响或**扩散尾音**（diffuse tail）。反射表面的属性会导致这些波的振幅以不同程度衰减。并且，由于反射声波存在延迟，相移会使这些波彼此干涉。这会导致某些频率相对于其他频率被衰减。当我们谈论一个空间的**声学特性**（acoustics）时，主要讨论的就是晚期混响对于声音感知“品质”或“音色”（timbre）的影响。
 
+<a id="figure-156"></a>
 ![Figure 15.6. Direct sound waves, early reflections and late reverberations.](../../assets/images/volume-02/chapter-15/figure-15-6-direct-early-reflections-late-reverberations.png)
 
 **Figure 15.6.** 直达声波、早期反射和晚期混响。

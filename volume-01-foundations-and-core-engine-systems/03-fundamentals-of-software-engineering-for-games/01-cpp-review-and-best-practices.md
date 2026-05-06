@@ -22,6 +22,7 @@
 
 我们可以使用统一建模语言（Unified Modeling Language，UML）所定义的约定来绘制类层次结构图。在这种表示法中，矩形代表类，带空心三角箭头的箭头代表继承。继承箭头从子类指向父类。图 3.1 展示了一个用 UML **静态类图**表示的简单类层次结构示例。
 
+<a id="figure-31"></a>
 ![Figure 3.1. UML static class diagram depicting a simple class hierarchy.](../../assets/images/volume-01/chapter-03/figure-3-1-uml-static-class-diagram-simple-class-hierarchy.png)
 
 **Figure 3.1.** 描绘简单类层次结构的 UML 静态类图。
@@ -32,10 +33,12 @@
 
 大多数 C++ 软件开发者会完全避免多重继承，或者只以有限形式允许它。一个常见经验法则是：只允许简单的、没有父类的类被多重继承到一个原本严格单继承的层次结构中。这样的类有时被称为 **mix-in 类**，因为它们可以在类树中的任意位置引入新的功能。图 3.3 展示了一个有些人为构造的 mix-in 类示例。
 
+<a id="figure-32"></a>
 ![Figure 3.2. The deadly diamond in a multiple inheritance hierarchy.](../../assets/images/volume-01/chapter-03/figure-3-2-deadly-diamond-multiple-inheritance-hierarchy.png)
 
 **Figure 3.2.** 多重继承层次结构中的致命菱形。
 
+<a id="figure-33"></a>
 ![Figure 3.3. Example of a mix-in class.](../../assets/images/volume-01/chapter-03/figure-3-3-example-of-a-mix-in-class.png)
 
 **Figure 3.3.** mix-in 类示例。

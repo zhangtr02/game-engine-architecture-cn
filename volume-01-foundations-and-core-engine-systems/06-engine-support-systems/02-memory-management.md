@@ -32,6 +32,7 @@
 
 **栈分配器**（stack allocator）非常容易实现。我们只需要通过 `malloc()`、全局 `new`，或者声明一个全局字节数组来分配一大块连续内存。如果使用全局字节数组，那么这块内存实际上会从可执行文件的 BSS 段中分配出来。分配器会维护一个指向栈顶的指针。该指针以下的所有内存地址都被认为正在使用，而该指针以上的所有地址都被认为是空闲的。
 
+<a id="figure-61"></a>
 ![Figure 6.1 Stack allocation and freeing back to a marker.](../../assets/images/volume-01/chapter-06/figure-6-1-stack-allocation-free-to-marker.png)
 
 **Figure 6.1.** 栈式分配，以及回滚到某个标记位置的释放方式。
@@ -80,6 +81,7 @@ private:
 
 在 Midway 的街机游戏 *Hydro Thunder* 中，所有内存分配都来自一个由双端栈分配器管理的大型内存块。底部栈用于加载和卸载关卡（赛道），顶部栈用于每帧都会分配并释放的临时内存块。这种分配方案效果非常好，并确保 *Hydro Thunder* 从未遭遇内存碎片问题（见 6.2.1.4 节）。*Hydro Thunder* 的首席工程师 Steve Ranck 在 [9, Section 1.9] 中对这种分配技术作了深入描述。
 
+<a id="figure-62"></a>
 ![Figure 6.2 A double-ended stack allocator.](../../assets/images/volume-01/chapter-06/figure-6-2-double-ended-stack-allocator.png)
 
 **Figure 6.2.** 双端栈分配器。
@@ -155,6 +157,7 @@ void* AllocAligned(size_t bytes, size_t align)
 
 不过，这里有一个问题：`new` 返回的原始地址可能已经是对齐的。在这种情况下，上面给出的代码根本不会移动原始地址，也就没有任何额外字节可以用来存储偏移量。为了解决这个问题，我们不再额外分配 `L - 1` 字节，而是额外分配 `L` 字节；然后始终把原始指针移动到下一个 `L` 字节边界，即使它原本已经对齐。这样，最大偏移量将是 `L` 字节，最小偏移量将是 1 字节。因此，我们总是至少有一个额外字节可以存储偏移值。
 
+<a id="figure-63"></a>
 ![Figure 6.3 Aligned memory allocation with a 16-byte alignment requirement.](../../assets/images/volume-01/chapter-06/figure-6-3-aligned-memory-allocation-16-byte-alignment.png)
 
 
@@ -310,6 +313,7 @@ while (true)
 
 动态堆分配的另一个问题是：内存会随着时间推移变得**碎片化**。程序刚开始运行时，堆内存完全空闲。当某个内存块被分配时，一段大小合适的连续堆内存区域会被标记为“使用中”，堆中剩余部分仍然保持空闲。当一个内存块被释放时，它会被标记为空闲，并且相邻的空闲块会被合并为一个更大的空闲块。
 
+<a id="figure-64"></a>
 ![Figure 6.4 Memory fragmentation.](../../assets/images/volume-01/chapter-06/figure-6-4-memory-fragmentation.png)
 
 **Figure 6.4.** 内存碎片。
@@ -328,10 +332,12 @@ while (true)
 
 - 池分配器也不会受到内存碎片问题的影响。池本身**确实会**变得碎片化，但这种碎片不会像通用堆那样导致过早的内存不足。池分配请求不会因为缺少足够大的连续空闲块而失败，因为所有块的大小完全相同。图 6.6 展示了这一点。
 
+<a id="figure-65"></a>
 ![Figure 6.5 A stack allocation is free from fragmentation problems.](../../assets/images/volume-01/chapter-06/figure-6-5-stack-allocation-free-from-fragmentation.png)
 
 **Figure 6.5.** 栈式分配不会受到碎片问题影响。
 
+<a id="figure-66"></a>
 ![Figure 6.6 A pool allocator is not degraded by fragmentation.](../../assets/images/volume-01/chapter-06/figure-6-6-pool-allocator-not-degraded-by-fragmentation.png)
 
 **Figure 6.6.** 池分配器不会因碎片化而退化。
@@ -340,6 +346,7 @@ while (true)
 
 当不同大小的对象以随机顺序被分配和释放时，既不能使用基于栈的分配器，也不能使用基于池的分配器。在这种情况下，可以通过周期性地对堆进行**碎片整理**（defragmenting）来避免碎片问题。碎片整理的过程是：通过把已分配块从较高内存地址移动到较低内存地址，将堆中的所有空闲“洞”合并起来，从而把这些洞推到更高地址处。一个简单算法是寻找第一个“洞”，然后把紧挨着该洞上方的已分配块移动到洞的开头。这样会产生一种把洞向更高地址“冒泡”的效果。
 
+<a id="figure-67"></a>
 ![Figure 6.7 Defragmentation by shifting allocated blocks to lower addresses.](../../assets/images/volume-01/chapter-06/figure-6-7-defragmentation-shifting-allocated-blocks-to-lower-addresses.png)
 
 **Figure 6.7.** 通过将已分配块移动到较低地址来进行碎片整理。

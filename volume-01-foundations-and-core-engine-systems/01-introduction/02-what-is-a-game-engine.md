@@ -10,6 +10,7 @@
 
 当然，这并不是一个非黑即白的区分。我们可以设想一个可复用性连续谱，每个引擎都位于这个连续谱上的某个位置。图 1.1 尝试标示了一些知名游戏/引擎在这一连续谱上的位置。
 
+<a id="figure-11"></a>
 ![Figure 1.1. Game engine reusability gamut.](../../assets/images/volume-01/chapter-01/figure-1-1-game-engine-reusability-gamut.png)
 
 **Figure 1.1.** 游戏引擎可复用性连续谱。

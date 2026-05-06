@@ -16,10 +16,12 @@ Parallax occlusion mapping 使用 heightmap 中的信息，在渲染平坦表面
 
 Displacement mapping（也称为 relief mapping）则会通过真正细分表面多边形并将其挤出，产生真实的表面细节；它同样使用 heightmap 来决定每个顶点应位移多少。这会产生最有说服力的效果——它能够正确地自遮挡和自阴影——因为真实几何体被生成出来了。Figure 11.56 比较了 bump mapping、parallax mapping 和 displacement mapping。
 
+<a id="figure-1156"></a>
 ![Figure 11.56 Comparison of bump mapping, parallax occlusion mapping, and displacement mapping.](../../assets/images/volume-02/chapter-11/figure-11-56-bump-parallax-displacement-mapping-comparison.png)
 
 **Figure 11.56.** Bump mapping（左）、parallax occlusion mapping（中）和 displacement mapping（右）的比较。
 
+<a id="figure-1157"></a>
 ![Figure 11.57 DirectX displacement mapping. Simple source geometry is tessellated at runtime to produce the surface details.](../../assets/images/volume-02/chapter-11/figure-11-57-directx-displacement-mapping.png)
 
 **Figure 11.57.** DirectX 位移映射。简单源几何体会在运行时被细分，以生成表面细节。
@@ -32,6 +34,7 @@ Figure 11.57 展示了一个在 DirectX 中实现 displacement mapping 的示例
 
 **高度场地形**（height field terrain）是建模大型地形区域的一种流行选择。由于高度场通常存储在灰度纹理图中，数据大小可以保持相对较小。在大多数基于高度场的地形系统中，水平面（$y = 0$）会被细分为规则网格模式，而地形顶点的高度通过采样高度场纹理来确定。单位面积内的三角形数量可以根据与摄像机的距离而变化，从而允许远处显示大尺度特征，同时又允许附近地形表现出大量细节。Figure 11.58 展示了一个通过高度场位图定义的地形示例。
 
+<a id="figure-1158"></a>
 ![Figure 11.58 A grayscale height field bitmap can be used to control the vertical positions of the vertices in a terrain grid mesh.](../../assets/images/volume-02/chapter-11/figure-11-58-height-field-terrain-bitmap.png)
 
 **Figure 11.58.** 灰度高度场位图（左）可用于控制地形网格中顶点的垂直位置（右）。在这个例子中，一个水面与地形网格相交，从而形成岛屿。
@@ -58,6 +61,7 @@ Figure 11.57 展示了一个在 DirectX 中实现 displacement mapping 的示例
 
 粒子效果也可以使用常规三角形网格几何体和适当的着色器进行渲染。然而，由于上面列出的独特特征，在真实生产级游戏引擎中，总是会使用专门的粒子效果动画与渲染系统来实现它们。Figure 11.59 展示了几个粒子效果示例。
 
+<a id="figure-1159"></a>
 ![Figure 11.59 Flame, smoke, and bullet tracer particle effects in Uncharted 3.](../../assets/images/volume-02/chapter-11/figure-11-59-uncharted-3-particle-effects.png)
 
 **Figure 11.59.** *Uncharted 3: Drake’s Deception* 中的火焰、烟雾和曳光弹粒子效果（© 2011/TM SIE。由 Naughty Dog 创建并开发，PlayStation 3）。
@@ -70,6 +74,7 @@ Figure 11.57 展示了一个在 DirectX 中实现 displacement mapping 的示例
 
 现代引擎最常使用的方法，是把 decal 建模为一个沿射线投射到场景中的矩形区域。这会在 3D 空间中产生一个矩形棱柱。该棱柱首先相交的任何表面都会成为 decal 的表面。被相交几何体的三角形会被提取出来，并被 decal 投影棱柱的四个边界平面裁剪。生成的三角形会通过为每个顶点生成适当的纹理坐标，映射上期望的 decal 纹理。然后，这些带纹理映射的三角形会被渲染到常规场景之上，通常还会使用 parallax mapping 给予它们深度错觉，并添加轻微的 z-bias（通常通过稍微移动近平面来实现），使它们不会与其覆盖的几何体发生 z-fighting。其结果就是弹孔、划痕或其他表面修改的外观。Figure 11.60 展示了一些弹孔 decal。
 
+<a id="figure-1160"></a>
 ![Figure 11.60 Parallax-mapped decals from Uncharted 3.](../../assets/images/volume-02/chapter-11/figure-11-60-uncharted-3-parallax-mapped-decals.png)
 
 **Figure 11.60.** *Uncharted 3: Drake’s Deception* 中的 parallax-mapped decals（© 2011/TM SIE。由 Naughty Dog 创建并开发，PlayStation 3）。
@@ -108,6 +113,7 @@ Figure 11.57 展示了一个在 DirectX 中实现 displacement mapping 的示例
 
 为了渲染 LOD tree，我们会基于节点到摄像机的距离，在树上做一次“切割”（cut），选择将要渲染的节点。Figure 11.61 展示了这一点。目标是选择尽可能低分辨率的树节点，使得对于任意一个被渲染节点，如果我们选择它的子节点，用户也无法察觉差异。换句话说，我们希望选择这样的树节点：其中的三角形每个大约只有**一个像素大小**。这个规则会产生与渲染所有叶节点（也就是渲染原始电影级资产）在视觉上几乎不可区分的结果：一旦三角形达到像素大小，使用更小的三角形也不会进一步提升渲染图像质量。
 
+<a id="figure-1161"></a>
 ![Figure 11.61 Rendering the triangle clusters in an LOD tree involves making a view-dependent cut across the tree.](../../assets/images/volume-02/chapter-11/figure-11-61-lod-tree-view-dependent-cut.png)
 
 **Figure 11.61.** 渲染 LOD tree 中的三角形簇时，需要根据它们到摄像机的距离，在树上做一次与视角相关的“切割”，以选择哪些节点用于渲染。来源：“Nanite: A Deep Dive,” Karis, Stubbe, and Wihlidal, *SIGGRAPH 2021* [263]。
@@ -122,6 +128,7 @@ Figure 11.57 展示了一个在 DirectX 中实现 displacement mapping 的示例
 
 使 Nanite 的虚拟化几何体高效且实用的关键洞见，是在构建 LOD tree 的每个新层时“锁定”一组**不同**的边。从最高分辨率源网格开始，我们把它拆分成每个最多由 128 个三角形构成的簇，然后选择一组 $N$ 个相邻簇。我们“锁定”该组的外部边，并应用边折叠减面，创建一个新的网格：它的三角形数量减半，但轮廓与原来的 $N$ 个簇相同。通常，这会得到一棵具有一个父节点和 $N$ 个子节点的 LOD tree。但我们再进一步，把父节点拆分成 $N/2$ 个新簇。这样做会使 LOD tree 变成一个 **LOD graph**，因为这 $N$ 个子簇最终会拥有不止一个父簇。Figure 11.62 展示了这一过程。从技术上讲，我们通过这个算法生成的图称为**有向无环图**（directed acyclic graph, DAG），因为节点之间的连接具有方向（父节点和子节点之间有区别），并且连接中没有“循环”。
 
+<a id="figure-1162"></a>
 ![Figure 11.62 Nanite locks down different meshlet edges at each stage of the decimation process.](../../assets/images/volume-02/chapter-11/figure-11-62-nanite-lod-dag-decimation.png)
 
 **Figure 11.62.** Nanite 在减面过程的每个阶段锁定不同的 meshlet 边。左：原始 meshlet 具有 16 个三角形，从中选择了四个簇。中：三角形数量减半，同时保留 meshlet 的轮廓边，得到一个两层 LOD tree。右：选择两个新簇，把 LOD tree 转换成 LOD DAG。每个这样的簇都会成为下一阶段减面的输入。来源：“Nanite: A Deep Dive,” Karis, Stubbe, and Wihlidal, *SIGGRAPH 2021* [263]。

@@ -14,10 +14,12 @@
 
 - **Execute（执行）。** 根据操作码，选择 CPU 内部合适的 functional unit（功能单元），例如 ALU、FPU、memory controller（内存控制器）等。指令会连同相关操作数数据一起被派发到选定组件进行处理，随后该功能单元执行相应操作。
 
+<a id="figure-48"></a>
 ![Figure 4.8. In a non-pipelined CPU, instruction stages are idle much of the time.](../../assets/images/volume-01/chapter-04/figure-4-8-non-pipelined-cpu-idle-stages.png)
 
 **Figure 4.8.** 在非流水线 CPU 中，指令阶段大部分时间处于空闲状态。
 
+<a id="figure-49"></a>
 ![Figure 4.9. Components of a pipelined scalar CPU.](../../assets/images/volume-01/chapter-04/figure-4-9-components-of-a-pipelined-scalar-cpu.png)
 
 **Figure 4.9.** 流水线标量 CPU 的组成部分。
@@ -30,6 +32,7 @@
 
 实际上，指令执行的每个阶段都由 CPU 内部不同的硬件负责，如图 4.9 所示。control unit（控制单元，CU）和内存控制器负责 instruction fetch（取指）阶段；CU 内部的另一个电路负责 decode（译码）阶段；ALU、FPU 或 VPU 负责 execute（执行）阶段的大部分工作；memory（内存）阶段由内存控制器完成；最后，write-back（写回）阶段主要涉及寄存器。CPU 内部不同电路之间的这种分工，是提高 CPU 效率的关键：我们只需要让所有阶段的硬件一直保持忙碌即可。
 
+<a id="figure-410"></a>
 ![Figure 4.10. Ideal flow of instructions through a pipelined CPU.](../../assets/images/volume-01/chapter-04/figure-4-10-ideal-flow-of-instructions-through-a-pipelined-cpu.png)
 
 **Figure 4.10.** 指令通过流水线 CPU 的理想流程。
@@ -66,6 +69,7 @@ $$
 
 有时，CPU 在某个特定时钟周期无法发射新指令。这称为 stall（停顿）。在这样的时钟周期中，流水线的第一阶段处于空闲状态。在下一个时钟周期中，第二阶段将处于空闲状态，依此类推。因此，stall 可以被理解为一个空闲时间的 “bubble”（气泡），它以每个时钟周期推进一个阶段的速度在流水线中传播。这些气泡有时也称为 delay slots（延迟槽）。
 
+<a id="figure-411"></a>
 ![Figure 4.11. A data dependency between instructions causes a pipeline stall.](../../assets/images/volume-01/chapter-04/figure-4-11-data-dependency-causes-pipeline-stall.png)
 
 **Figure 4.11.** 指令之间的数据依赖会导致流水线停顿。
@@ -142,6 +146,7 @@ SkipDivision:
 
 这里的依赖存在于 `cmp`（compare，比较）指令和 `jz`（jump if equal to zero，若等于零则跳转）指令之间。CPU 在知道比较结果之前，无法发射条件跳转指令。这称为 branch dependency（分支依赖，也称 control dependency，控制依赖）。图 4.12 展示了分支依赖。
 
+<a id="figure-412"></a>
 ![Figure 4.12. A dependency between a comparison instruction and a conditional branch instruction is called a branch dependency.](../../assets/images/volume-01/chapter-04/figure-4-12-branch-dependency.png)
 
 **Figure 4.12.** 比较指令与条件分支指令之间的依赖称为分支依赖。
@@ -252,10 +257,12 @@ SafeFloatDivide_pred(float, float, float):
 
 > **脚注 1**：从技术上说，pipelining（流水线）和 superscalar designs（超标量设计）是两种相互独立的并行形式。流水线 CPU 不一定是超标量 CPU。同样，超标量 CPU 也不一定是流水线 CPU，虽然大多数超标量 CPU 都是流水线化的。
 
+<a id="figure-413"></a>
 ![Figure 4.13. A pipelined superscalar CPU contains multiple execution components (ALUs, FPUs and/or VPUs) fed by a single instruction scheduler which typically supports out-of-order and speculative execution.](../../assets/images/volume-01/chapter-04/figure-4-13-pipelined-superscalar-cpu.png)
 
 **Figure 4.13.** 流水线超标量 CPU 包含多个执行组件（ALU、FPU 和/或 VPU），由单个指令调度器供给；该调度器通常支持乱序执行和推测执行。
 
+<a id="figure-414"></a>
 ![Figure 4.14. Best-case execution of 14 instructions “A” through “N” on a superscalar pipelined CPU over seven clock cycles.](../../assets/images/volume-01/chapter-04/figure-4-14-best-case-execution-on-superscalar-pipelined-cpu.png)
 
 **Figure 4.14.** 在七个时钟周期内，14 条指令 “A” 到 “N” 在超标量流水线 CPU 上执行的最佳情况。
@@ -276,6 +283,7 @@ SafeFloatDivide_pred(float, float, float):
 
 我们可以把 PlayStation 2 作为 VLIW 架构的一个具体例子。PS2 包含两个称为 vector units（向量单元）的协处理器（VU0 和 VU1），每个都能够在每个时钟周期派发两条指令。每个 instruction word（指令字）由两个称为 low 和 high 的槽位组成。在手写汇编语言时，有效填满两个槽位通常是一项挑战，不过后来也开发了一些工具，帮助程序员把“一周期一条指令”的程序转换成高效的“一周期两条指令”格式。
 
+<a id="figure-415"></a>
 ![Figure 4.15. A pipelined VLIW CPU architecture consisting of two integer ALUs and two floating-point FPUs. Each very long instruction word consists of two integer and two floating-point operations, which are dispatched to the corresponding functional units. Notice the absence of the complex instruction scheduling logic that would be present in a superscalar CPU.](../../assets/images/volume-01/chapter-04/figure-4-15-pipelined-vliw-cpu-architecture.png)
 
 **Figure 4.15.** 一种流水线 VLIW CPU 架构，由两个整数 ALU 和两个浮点 FPU 组成。每条超长指令字包含两个整数操作和两个浮点操作，并被派发到对应的功能单元。注意其中没有超标量 CPU 中那种复杂的指令调度逻辑。

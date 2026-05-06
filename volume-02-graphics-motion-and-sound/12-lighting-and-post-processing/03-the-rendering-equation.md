@@ -136,6 +136,7 @@ $$
 
 渲染方程可以写成许多不同形式。有些形式只是所用记号的细节不同；有些形式用单位向量而不是极角来表达方向；还有一些形式使用面积而不是立体角。表达渲染方程的各种形式很多，这可能会让刚接触全局光照的渲染程序员感到困惑。在接下来的几节中，我们会讨论渲染方程的一些替代形式，并说明这些形式其实都是在用略有不同的方式表达完全相同的概念。
 
+<a id="figure-129"></a>
 ![Figure 12.9. The incident direction Ψ can be replaced by a unit light vector ℓ and the exitant direction Θ can be replaced by a unit view vector v.](../../assets/images/volume-02/chapter-12/figure-12-9-incident-direction-light-vector-exitant-direction-view-vector.png)
 
 **Figure 12.9.** 入射方向 $\Psi$ 可以替换为单位光照向量 $\ell$，出射方向 $\Theta$ 可以替换为单位视线向量 $\mathbf{v}$。
@@ -260,6 +261,7 @@ $$
 
 到目前为止，我们关注的是**辐射度量学量**（radiometric quantities）的理论与数学，例如辐射功率、辐照度和辐射亮度。然而，渲染引擎还需要考虑人类感知，所以我们真正需要计算的是对应的**光度学量**（photometric quantities）。正如 Section 11.2.3.4 中提到的，辐射功率在光度学中的对应量称为**光功率**（luminous power）。它被定义为辐射功率乘以一条曲线 $V(\lambda)$，该曲线建模了人眼对不同波长的敏感度。辐射功率的单位是瓦特，而光功率的单位是流明。1 流明被定义为在人眼最大敏感波长（$\lambda = 555 \ \mathrm{nm}$）处 683 瓦功率所对应的光功率。
 
+<a id="table-121"></a>
 ![Table 12.1. Comparison of radiometric and photometric quantities.](../../assets/images/volume-02/chapter-12/table-12-1-radiometric-and-photometric-quantities-comparison.png)
 
 **Table 12.1.** 辐射度量学量与光度学量的比较。

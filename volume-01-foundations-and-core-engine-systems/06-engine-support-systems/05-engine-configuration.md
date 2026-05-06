@@ -2,6 +2,7 @@
 
 游戏引擎是复杂的“大家伙”，它们总是会有大量可配置选项。其中一些选项会通过游戏内的一个或多个选项菜单暴露给玩家。例如，游戏可能会暴露与图形质量、音乐和音效音量，或者控制器配置有关的选项。另一些选项则只为游戏开发团队而创建，并且在游戏发布前要么被隐藏，要么被完全从游戏中剥离。例如，玩家角色的最大行走速度可能会作为一个选项暴露出来，以便在开发期间进行微调，但在发布前它可能会被改成一个硬编码值。
 
+<a id="figure-612"></a>
 ![Figure 6.12 Text translations of the string NEW GAME into all languages supported by Naughty Dog's The Last of Us.](../../assets/images/volume-01/chapter-06/figure-6-12-new-game-text-translations.png)
 
 **Figure 6.12.** 字符串 “NEW GAME” 被翻译成 Naughty Dog 的 *The Last of Us* 所支持的所有语言。
@@ -12,10 +13,12 @@
 
 - **文本配置文件**。保存和加载配置选项最常见的方法，是把它们放入一个或多个文本文件中。这些文件的格式在不同引擎之间差异很大，但通常都非常简单。例如，Windows INI 文件（OGRE 渲染器使用这种格式）由按逻辑区段分组的键值对平面列表组成。JSON 格式也是可配置游戏选项文件的另一种常见选择。XML 也是一种可行选项，虽然现在大多数开发者认为 JSON 比 XML 更简洁，也更易读。
 
+<a id="figure-613"></a>
 ![Figure 6.13 Naughty Dog localization tool speech audio assets.](../../assets/images/volume-01/chapter-06/figure-6-13-naughty-dog-localization-tool-speech-audio-assets.png)
 
 **Figure 6.13.** Naughty Dog 本地化工具的主窗口再次出现，这次显示的是带有相应字幕文本的语音音频资源列表。
 
+<a id="figure-614"></a>
 ![Figure 6.14 Detailed asset view showing recorded translations for the speech asset BADA_GAM_MIL_ESCAPE_OVERPASS_001.](../../assets/images/volume-01/chapter-06/figure-6-14-detailed-asset-view-recorded-translations.png)
 
 **Figure 6.14.** 详细资源视图，显示语音资源 `BADA_GAM_MIL_ESCAPE_OVERPASS_001`（“We missed all the action”）的录制翻译。

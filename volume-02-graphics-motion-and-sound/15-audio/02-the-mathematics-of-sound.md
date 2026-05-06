@@ -17,6 +17,7 @@
 
 在 Figure 15.1 中，我们看到可以将连续时间信号可视化为普通函数图像，其中时间 $t$ 位于水平轴上，信号值 $p(t)$ 位于垂直轴上。我们也可以用类似方式绘制离散时间信号 $x[n]$，只不过函数值只在自变量 $n$ 的整数值处有定义（见 Figure 15.7）。理解离散时间信号的一种常见方式，是把它看作连续时间信号的**采样版本**（sampled version）。采样过程（也称为**数字化**，digitization，或**模数转换**，analog-to-digital conversion）位于数字音频录制与播放的核心。关于采样的更多信息，见 Section 15.3.2.1。
 
+<a id="figure-157"></a>
 ![Figure 15.7. The value of a discrete-time signal x[n] is defined only for integer values of n.](../../assets/images/volume-02/chapter-15/figure-15-7-discrete-time-signal.png)
 
 **Figure 15.7.** 离散时间信号 $x[n]$ 的值只在 $n$ 的整数值处有定义。
@@ -25,6 +26,7 @@
 
 在接下来的讨论中，理解一些通过改变信号自变量来操作信号的基本方式非常重要。例如，为了将某个信号围绕 $t=0$ 进行**反射**（reflect），只需在信号方程中把 $t$ 替换为 $-t$。为了将整个信号沿时间轴向右（即正方向）**平移**距离 $s$，则在信号方程中把 $t$ 替换为 $t-s$。（向左/负方向进行时间平移则通过把 $t$ 替换为 $t+s$ 实现。）我们还可以通过缩放自变量来扩展或压缩信号的定义域。这些简单变换如 Figure 15.8 所示。
 
+<a id="figure-158"></a>
 ![Figure 15.8. Simple manipulations of a signal’s independent variable.](../../assets/images/volume-02/chapter-15/figure-15-8-signal-independent-variable-manipulations.png)
 
 **Figure 15.8.** 对信号自变量进行的简单操作。
@@ -47,6 +49,7 @@ $$
 
 我们可以把任何系统可视化为一个具有输入信号和输出信号的黑盒，如 Figure 15.9 所示。
 
+<a id="figure-159"></a>
 ![Figure 15.9. A system as a black box.](../../assets/images/volume-02/chapter-15/figure-15-9-system-as-black-box.png)
 
 **Figure 15.9.** 作为黑盒的系统。
@@ -59,6 +62,7 @@ $$
 
 Figure 15.10 展示了所有这些连接方式的例子。
 
+<a id="figure-1510"></a>
 ![Figure 15.10. Various ways to interconnect systems. In the serial connection, y(t)=B(A(x(t))). In the parallel connection, y(t)=aA(x(t))+bB(x(t)). In the feedback loop, y(t)=x(t)-aẏ(t).](../../assets/images/volume-02/chapter-15/figure-15-10-system-interconnections.png)
 
 **Figure 15.10.** 系统之间的几种连接方式。在串联连接中，$y(t)=B(A(x(t)))$。在并联连接中，$y(t)=aA(x(t))+bB(x(t))$。在反馈环中，$y(t)=x(t)-a\dot{y}(t)$。
@@ -87,6 +91,7 @@ $$
 
 离散时间单位冲激如 Figure 15.11 所示。
 
+<a id="figure-1511"></a>
 ![Figure 15.11. The unit impulse in discrete time.](../../assets/images/volume-02/chapter-15/figure-15-11-discrete-time-unit-impulse.png)
 
 **Figure 15.11.** 离散时间中的单位冲激。
@@ -119,10 +124,12 @@ $$
 
 如 Figure 15.13 所示，我们通常通过绘制一个箭头来表示单位冲激，箭头高度表示曲线下方的面积（因为该函数在 $t=0$ 处的实际“高度”为无穷大）。
 
+<a id="figure-1512"></a>
 ![Figure 15.12. The unit impulse can be defined as the limit of a box function b(t) whose width approaches zero.](../../assets/images/volume-02/chapter-15/figure-15-12-unit-impulse-box-function-limit.png)
 
 **Figure 15.12.** 单位冲激可以定义为盒子函数 $b(t)$ 在宽度趋近于零时的极限。
 
+<a id="figure-1513"></a>
 ![Figure 15.13. The value of the unit impulse function δ(t) is zero everywhere except at t=0, where it is infinite. It is drawn as an arrow of unit height to indicate that the area under the curve is 1.](../../assets/images/volume-02/chapter-15/figure-15-13-continuous-time-unit-impulse.png)
 
 **Figure 15.13.** 单位冲激函数 $\delta(t)$ 除了在 $t=0$ 处为无穷大之外，处处为零。它被画成单位高度的箭头，用于表示曲线下方的面积为 1。
@@ -157,6 +164,7 @@ $$
 
 $x[0]$ 的值只是一个常数，所以由于我们处理的是线性系统，输出 $y[n]$ 也只会是同一个常数乘以系统对单位冲激 $\delta[n]$ 的响应。我们使用信号 $h[n]$ 来表示系统对一个“裸”的单位冲激的响应：
 
+<a id="figure-1514"></a>
 ![Figure 15.14. Examples of the impulse response of a system in discrete and continuous time.](../../assets/images/volume-02/chapter-15/figure-15-14-impulse-response-discrete-continuous.png)
 
 **Figure 15.14.** 系统在离散时间和连续时间中的冲激响应示例。
@@ -244,6 +252,7 @@ $$
 3. 在整个 $\tau$ 轴上把两个信号相乘。
 4. 沿 $\tau$ 轴从 $-\infty$ 到 $+\infty$ 积分，以求出所得曲线下方的面积。这就是 $y(t)$ 在这个特定 $t$ 值处的值（本例中为 $t=4$）。
 
+<a id="figure-1515"></a>
 ![Figure 15.15. Visualization of the convolution operation in continuous time.](../../assets/images/volume-02/chapter-15/figure-15-15-continuous-time-convolution-visualization.png)
 
 **Figure 15.15.** 连续时间中卷积运算的可视化。
@@ -331,6 +340,7 @@ $$
 
 复数的辐角有时也称为它的**相位**（phase）。正如稍后会看到的，“相位”这一术语与式（15.10）中的相位偏移 $\phi$ 密切相关。复数的模长和辐角如 Figure 15.16 所示。
 
+<a id="figure-1516"></a>
 ![Figure 15.16. The magnitude |c|=sqrt(a²+b²) of a complex number is its length in the complex plane, and its argument argc=tan⁻¹(b/a) is the angle it makes with the Re axis.](../../assets/images/volume-02/chapter-15/figure-15-16-complex-number-magnitude-argument.png)
 
 **Figure 15.16.** 复数的模长 $|c|=\sqrt{a^2+b^2}$ 是它在复平面中的长度，而它的辐角 $\arg c=\tan^{-1}(b/a)$ 是它与 $\Re$ 轴形成的角。
@@ -339,6 +349,7 @@ $$
 
 这里不会讨论复数的全部性质。关于复数理论的深入讨论，可参见 [346]。不过，有一种数学运算与本文有关：**复数乘法**（complex multiplication）。
 
+<a id="figure-1517"></a>
 ![Figure 15.17. Multiplying two complex numbers together that both have magnitudes of 1 produces a pure rotation in the complex plane.](../../assets/images/volume-02/chapter-15/figure-15-17-complex-multiplication-rotation.png)
 
 **Figure 15.17.** 将两个模长都为 1 的复数相乘，会在复平面中产生纯旋转。
@@ -375,6 +386,7 @@ $$
 
 这解释了为什么单位长度四元数能够在 3D 空间中作为旋转来运作！四元数本质上是一种四维复数，拥有一个实部和三个虚部。因此，四元数在三维中遵循的基本规则，与普通复数在二维中遵循的规则相同。
 
+<a id="figure-1518"></a>
 ![Figure 15.18. Multiplying the imaginary number j=sqrt(-1) by itself acts like rotating a unit vector by 90 degrees in the complex plane.](../../assets/images/volume-02/chapter-15/figure-15-18-imaginary-unit-rotation.png)
 
 **Figure 15.18.** 将虚数 $j=\sqrt{-1}$ 与自身相乘，其效果类似于在复平面中将单位向量旋转 90 度。
@@ -409,6 +421,7 @@ $$
 
 把**复数提升到实数次幂**（$c^n$）会在复平面中产生旋转，因此投影到平面中的任意轴上时都会得到正弦波。事实证明，我们也可以通过把**实数提升到复数次幂**（$n^c$）来得到这种旋转效果。这意味着可以把式（15.10）用复数写成：
 
+<a id="figure-1519"></a>
 ![Figure 15.19. Multiplying a complex number by itself repeatedly traces out a circular path in the Argand plane, producing a sinusoid when projected onto any axis through the origin.](../../assets/images/volume-02/chapter-15/figure-15-19-complex-exponential-sinusoid.png)
 
 **Figure 15.19.** 反复将一个复数与自身相乘，会在 Argand 平面中描绘一条圆形路径；当投影到任意经过原点的轴上时，会产生正弦波。
@@ -469,6 +482,7 @@ $$
 
 一般而言，实值信号的傅里叶变换是一个**复值信号**（$X(\omega)\in\mathbb{C}$）。在可视化傅里叶变换时，通常使用两张图来绘制。例如，可以绘制其实部和虚部。或者，也可以在两张不同的图上绘制它的模长和辐角（角度）——这种可视化称为 **Bode plot**（发音为“Boh-dee”，伯德图）。Figure 15.20 展示了一个信号及其伯德图示例。
 
+<a id="figure-1520"></a>
 ![Figure 15.20. The Fourier transform yields a complex-valued frequency domain signal. A Bode plot is used to visualize this complex-valued signal in terms of its magnitude and its phase (or argument).](../../assets/images/volume-02/chapter-15/figure-15-20-fourier-transform-bode-plot.png)
 
 **Figure 15.20.** 傅里叶变换会得到一个复值频域信号。伯德图用于从模长和相位（或辐角）两个方面可视化该复值信号。
@@ -503,12 +517,14 @@ $$
 
 理想滤波器的频率响应 $H(\omega)$ 看起来像一个矩形盒，在通带中取值为 1，在阻带中取值为 0。当它与输入信号的傅里叶变换 $X(\omega)$ 相乘时，输出 $Y(\omega)=X(\omega)H(\omega)$ 的通带频率会被精确保留，而阻带频率全部被置为 0。理想滤波器的频率响应如 Figure 15.21 所示。
 
+<a id="figure-1521"></a>
 ![Figure 15.21. The frequency response H(ω) for an ideal filter has a value of one in the passband and zero in the stopband.](../../assets/images/volume-02/chapter-15/figure-15-21-ideal-filter-frequency-response.png)
 
 **Figure 15.21.** 理想滤波器的频率响应 $H(\omega)$ 在通带中取值为 1，在阻带中取值为 0。
 
 当然，能够完全通过某些频率并完全抑制其他频率的理想滤波器未必总是理想选择。大多数真实世界滤波器的频率响应在通带和阻带之间都有一个逐渐衰减的过渡区。当期望频率和不需要的频率之间没有单一、清晰的分界线时，这种特性有助于进行滤波。具有渐进衰减的低通滤波器频率响应如 Figure 15.22 所示。
 
+<a id="figure-1522"></a>
 ![Figure 15.22. The frequency response H(ω) for an RC resistor-capacitor low-pass filter with a gradual fall-off. Both the horizontal and vertical axes of both plots are drawn using a logarithmic scale.](../../assets/images/volume-02/chapter-15/figure-15-22-rc-low-pass-filter-frequency-response.png)
 
 **Figure 15.22.** 具有渐进衰减特性的 RC（电阻-电容）低通滤波器的频率响应 $H(\omega)$。两幅图的水平轴和垂直轴都使用对数刻度绘制。

@@ -18,6 +18,7 @@
 
 从数学上说，IK 可以归结为一个**误差最小化**（error minimization）问题。与大多数最小化问题一样，解可能只有一个，也可能有多个，甚至可能没有解。这在直觉上也很合理：如果我试图够到房间另一端的门把手，在不走过去的情况下我是不可能够到的。IK 在骨架初始姿态已经与期望目标相当接近时效果最好。这有助于算法聚焦到“最近”的解，并在合理的处理时间内完成。Figure 13.45 展示了 IK 的作用。
 
+<a id="figure-1345"></a>
 ![Figure 13.45. Inverse kinematics attempts to bring an end effector joint into a target global pose by minimizing the error between them.](../../assets/images/volume-02/chapter-13/figure-13-45-inverse-kinematics-end-effector-target-pose.png)
 
 **Figure 13.45.** 反向运动学试图通过最小化末端执行器关节与目标全局姿态之间的误差，使末端执行器到达目标姿态。
@@ -26,6 +27,7 @@
 
 现在设想绘制一张三维图：对于每一种关节旋转组合（即二维配置空间中的每一个点），都绘制末端执行器到期望目标之间的距离。Figure 13.46 展示了这类图的一个例子。这个三维曲面中的“山谷”表示末端执行器尽可能接近目标的区域。当曲面的高度为零时，末端执行器已经到达目标。因此，反向运动学试图在这个曲面上寻找极小值（低点）。
 
+<a id="figure-1346"></a>
 ![Figure 13.46. A three-dimensional plot of the distance from the end effector to the target for each point in two-dimensional configuration space. IK finds the local minimum.](../../assets/images/volume-02/chapter-13/figure-13-46-ik-distance-error-configuration-space-local-minimum.png)
 
 **Figure 13.46.** 在二维配置空间中，对每个点绘制末端执行器到目标的距离所形成的三维图。IK 会寻找局部极小值。
@@ -36,4 +38,4 @@
 
 当角色死亡或失去意识时，其身体会变得松弛。在这类情况下，我们希望身体能够以物理上真实的方式与周围环境发生反应。为此，可以使用**布娃娃**（rag doll）。布娃娃是一组经过物理模拟的刚体集合，其中每个刚体表示角色身体中一个半刚性的部位，例如前臂或大腿。这些刚体在角色关节处相互约束，从而产生看起来自然的“无生命”身体运动。刚体的位置和朝向由物理系统决定，随后用于驱动角色骨架中某些关键关节的位置和朝向。物理系统到骨架的数据传递通常作为后处理步骤完成。
 
-要真正理解布娃娃物理，必须首先理解碰撞系统和物理系统的工作方式。布娃娃将在 [Section 14.4.8.7](../14-collision-and-rigid-body-dynamics/04-rigid-body-dynamics.md#14487-rag-dolls) 和 [Section 14.5.3.8](../14-collision-and-rigid-body-dynamics/05-integrating-a-physics-engine-into-your-game.md#14538-rag-dolls) 中更详细地讨论。
+要真正理解布娃娃物理，必须首先理解碰撞系统和物理系统的工作方式。布娃娃将在 [Section 14.4.8.7](../14-collision-and-rigid-body-dynamics/04-rigid-body-dynamics.md#14487-布娃娃) 和 [Section 14.5.3.8](../14-collision-and-rigid-body-dynamics/05-integrating-a-physics-engine-into-your-game.md#14538-布娃娃集成) 中更详细地讨论。

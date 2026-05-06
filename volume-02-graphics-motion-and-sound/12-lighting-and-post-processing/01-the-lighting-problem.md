@@ -1,6 +1,6 @@
 ## 12.1 光照问题
 
-在 [Section 11.1](../11-3d-graphics-and-rendering/01-introduction.md#111-introduction) 中，我们说过，任何 3D 渲染引擎的任务都是求解**渲染问题**（rendering problem）：给定一个由场景元素、光源和虚拟摄像机构成的虚拟世界，任务是生成该场景的一张彩色图像，使其尽可能接近真实世界摄像机观看同一场景时所产生的图像。我们进一步将渲染问题分解为两个子问题，分别称为**可见性问题**（visibility problem）和**光照问题**（lighting problem）。
+在 [Section 11.1](../11-rendering/01-the-rendering-problem.md#111-渲染问题) 中，我们说过，任何 3D 渲染引擎的任务都是求解**渲染问题**（rendering problem）：给定一个由场景元素、光源和虚拟摄像机构成的虚拟世界，任务是生成该场景的一张彩色图像，使其尽可能接近真实世界摄像机观看同一场景时所产生的图像。我们进一步将渲染问题分解为两个子问题，分别称为**可见性问题**（visibility problem）和**光照问题**（lighting problem）。
 
 为了解决可见性问题，引擎必须确定一组表面点 $\{x_j\}$，使摄像机成像表面上的第 $j$ 个虚拟光传感器能够直接且无遮挡地看到表面点 $x_j$。这可以通过从摄像机焦点出发，穿过每个虚拟光传感器投射射线，并确定每条射线与哪个表面相交来完成；也可以通过带深度缓冲的三角形光栅化来实现。一旦可见表面点已知，我们就可以求解光照问题：在给定场景中照明条件的情况下，确定摄像机第 $j$ 个光传感器将测得的光能的颜色和强度。
 
@@ -28,7 +28,7 @@
 
 - 光子可以从源介质**透射**（transmitted）到目标介质中。当它穿过两种介质之间的界面时，光子的路径通常会发生弯折，即发生**折射**（refracted）。
 
-- 光子可以被**吸收**（absorbed）。在这种情况下，光子的能量会转化为热量，光子本身不复存在。吸收可能只发生在某些波长上，而其他波长则被反射；这就产生了材料的表观颜色。白色物体会反射入射光的所有波长，而红色物体会吸收除红色之外的所有波长。（关于人类如何感知颜色，以及颜色如何以数值方式编码，见 [Section 11.2.3](../11-3d-graphics-and-rendering/02-the-rendering-engine.md#1123-color)。）
+- 光子可以被**吸收**（absorbed）。在这种情况下，光子的能量会转化为热量，光子本身不复存在。吸收可能只发生在某些波长上，而其他波长则被反射；这就产生了材料的表观颜色。白色物体会反射入射光的所有波长，而红色物体会吸收除红色之外的所有波长。（关于人类如何感知颜色，以及颜色如何以数值方式编码，见 [Section 11.2.3](../11-rendering/02-lights-camera-action.md#1123-色彩理论)。）
 
 #### 12.1.2.2 与参与介质的相互作用
 
@@ -58,6 +58,7 @@
 
 当一个场景只考虑直接光源进行照明时，我们称其使用的是**局部照明模型**（local illumination model）。既考虑直接光源，又考虑间接入射光源的方法，统称为**全局照明模型**（global illumination models）。全局照明模型通常还会考虑光与场景中物质之间的复杂相互作用，例如**次表面散射**（subsurface scattering），它模拟光子如何穿入材料，在物体内部反弹，然后从不同于光子入射点的表面点重新发射出来；全局照明模型也会考虑光子穿过**参与介质**时发生的散射和吸收。如 Figure 12.1 所示，只有同时考虑直接照明和间接照明——换句话说，使用全局照明模型——才能真正实现照片级真实感渲染。
 
+<a id="figure-121"></a>
 ![Figure 12.1. Left: A variation on the classic “Cornell box” scene rendered with only local illumination. Right: The same scene rendered with global illumination for a photorealistic result. Shadows are soft, and the colors of the walls “bleed” onto the white boxes in a realistic way. Source: [265].](../../assets/images/volume-02/chapter-12/figure-12-1-local-vs-global-illumination-cornell-box.png)
 
 **Figure 12.1.** 左图：经典 “Cornell box” 场景的一个变体，仅使用局部照明渲染。右图：同一场景使用全局照明渲染，得到照片级真实感结果。阴影是柔和的，墙壁颜色会以真实方式“渗色”到白色盒子上。来源：[265]。

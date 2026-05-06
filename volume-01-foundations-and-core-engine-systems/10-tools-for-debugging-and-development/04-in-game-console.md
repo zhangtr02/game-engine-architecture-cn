@@ -4,6 +4,7 @@
 
 控制台比菜单系统略微不方便，尤其是对那些打字不太快的人来说更是如此。然而，控制台可以比菜单强大得多。有些游戏内控制台只提供一组非常基础的硬编码命令，使其灵活性大致和菜单系统相当。但另一些控制台则为引擎中几乎每一项功能都提供了丰富的接口。Figure 10.10 展示了 *Minecraft* 中游戏内控制台的截图。
 
+<a id="figure-1010"></a>
 ![Figure 10.10 The in-game console in Minecraft.](../../assets/images/volume-01/chapter-10/figure-10-10-minecraft-in-game-console.png)
 
 **Figure 10.10.** *Minecraft* 中的游戏内控制台，叠加在主游戏画面之上，并显示了一组有效命令列表。

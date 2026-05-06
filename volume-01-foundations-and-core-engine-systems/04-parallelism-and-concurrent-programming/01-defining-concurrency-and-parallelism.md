@@ -6,10 +6,12 @@
 
 concurrent programming（并发编程）与 sequential programming（顺序编程）最主要的区别在于：是否会读取和/或写入 shared data（共享数据）。如图 4.1 所示，如果我们有两个或更多控制流，并且每个控制流都操作一块完全独立的数据，那么从技术上说，这并不是并发的例子——它只是“同时计算”。
 
+<a id="figure-41"></a>
 ![Figure 4.1. Two flows of control operating on independent data are not considered concurrent because they are not prone to data races.](../../assets/images/volume-01/chapter-04/figure-4-1-independent-data-not-concurrent.png)
 
 **Figure 4.1.** 两个控制流在彼此独立的数据上运行时，不被视为并发，因为它们不会产生数据竞态。
 
+<a id="figure-42"></a>
 ![Figure 4.2. Two flows of control both reading from a shared data file and/or writing to a shared data file are examples of concurrency.](../../assets/images/volume-01/chapter-04/figure-4-2-shared-data-concurrency.png)
 
 **Figure 4.2.** 两个控制流都从共享数据文件读取和/或向共享数据文件写入，是并发的示例。
@@ -71,10 +73,12 @@ Explicit parallelism（显式并行）指的是：为了同时运行 more than o
 - **Single instruction, multiple data（SIMD，单指令多数据）：** 单一指令流操作多个数据流，也就是在多个独立数据流上同时执行相同的操作序列。
 - **Multiple instruction, single data（MISD，多指令单数据）：** 多个指令流都操作同一个数据流。MISD 在游戏中很少使用，但一个常见应用是通过冗余来提供 fault tolerance（容错能力）。
 
+<a id="figure-43"></a>
 ![Figure 4.3. Example of SISD. A single ALU performs the multiply first, followed by the divide.](../../assets/images/volume-01/chapter-04/figure-4-3-example-of-sisd.png)
 
 **Figure 4.3.** SISD 示例：单个 ALU 先执行乘法，再执行除法。
 
+<a id="figure-44"></a>
 ![Figure 4.4. Example of MIMD. Two ALUs perform operations in parallel.](../../assets/images/volume-01/chapter-04/figure-4-4-example-of-mimd.png)
 
 **Figure 4.4.** MIMD 示例：两个 ALU 并行执行操作。
@@ -89,10 +93,12 @@ Explicit parallelism（显式并行）指的是：为了同时运行 more than o
 
 - MIMD 分类也适用于这样一种情况：单个 ALU 通过 time-slicing（时间片轮转）处理两个独立指令流，如图 4.5 所示。
 
+<a id="figure-45"></a>
 ![Figure 4.5. Example of time-sliced MIMD. A single ALU performs operations on behalf of two independent instruction streams, perhaps by alternating between them.](../../assets/images/volume-01/chapter-04/figure-4-5-time-sliced-mimd.png)
 
 **Figure 4.5.** 时间片式 MIMD 示例：单个 ALU 代表两个独立指令流执行操作，可能通过在它们之间交替切换来实现。
 
+<a id="figure-46"></a>
 ![Figure 4.6. Example of SIMD. A single vector processing unit (VPU) performs the multiply first, followed by the divide, but each instruction operates on a pair of four-element input vectors and produces a four-element output vector.](../../assets/images/volume-01/chapter-04/figure-4-6-example-of-simd.png)
 
 **Figure 4.6.** SIMD 示例：单个向量处理单元（VPU）先执行乘法，再执行除法，但每条指令作用于一对四元素输入向量，并产生一个四元素输出向量。
@@ -105,6 +111,7 @@ Explicit parallelism（显式并行）指的是：为了同时运行 more than o
 
 近年来，为了描述 graphics processing unit（GPU，图形处理器）的设计，人们在 Flynn 分类法中加入了第五种分类。
 
+<a id="figure-47"></a>
 ![Figure 4.7. Example of MISD. Two ALUs process the same instruction stream (multiply first, followed by divide) and ideally produce identical results.](../../assets/images/volume-01/chapter-04/figure-4-7-example-of-misd.png)
 
 **Figure 4.7.** MISD 示例：两个 ALU 处理同一条指令流（先乘法，再除法），理想情况下产生相同结果。

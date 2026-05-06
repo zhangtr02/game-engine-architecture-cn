@@ -10,6 +10,7 @@
 
 游戏世界编辑器通常允许指定游戏对象的初始状态（即其属性值）。大多数游戏世界编辑器还会为用户提供某种能力，用于控制游戏世界中动态对象的行为。这种控制可以通过数据驱动的配置参数实现（例如，对象 A 应该以不可见状态开始，对象 B 在生成后应立即攻击玩家，对象 C 是可燃的，等等），也可以通过脚本语言实现，从而将游戏设计师的任务推向编程领域。有些世界编辑器甚至允许在几乎没有程序员介入的情况下定义全新的游戏对象类型。
 
+<a id="figure-164"></a>
 ![Figure 16.4. The Radiant world editor for the Quake and Doom family of engines.](../../assets/images/volume-02/chapter-16/figure-16-4-radiant-world-editor-quake-doom-engines.png)
 
 **Figure 16.4.** 用于 Quake 和 Doom 系列引擎的 Radiant 世界编辑器。
@@ -22,12 +23,14 @@
 
 世界创建的基本单位通常是分块（也称为关卡或地图——见 [Section 16.1.2](01-anatomy-of-a-game-world.md#1612-世界分块)）。游戏世界编辑器通常允许创建新的分块，并允许对已有分块进行重命名、拆分、合并或删除。每个分块都可以关联到一个或多个静态网格，和/或其他静态数据元素，例如 AI 导航网格、玩家可抓取边缘的描述、掩体点定义，等等。在某些引擎中，分块由单个背景网格定义，并且不能脱离该网格而存在。在另一些引擎中，分块可以独立存在，也许由一个包围体定义（例如 AABB、OBB 或任意多边形区域），并且可以填充零个或多个网格。
 
+<a id="figure-165"></a>
 ![Figure 16.5. Valve’s Hammer editor for the Source 2 engine.](../../assets/images/volume-02/chapter-16/figure-16-5-valve-hammer-editor-source-2-engine.png)
 
 **Figure 16.5.** Valve 为 Source 2 引擎提供的 Hammer 编辑器。
 
 有些世界编辑器会提供专门工具，用于制作地形、水体以及其他专门的静态元素。在另一些引擎中，这些元素可能使用标准 DCC 应用程序制作，但会以某种方式加上标记，以向资源调理管线和/或运行时引擎表明它们是特殊元素。（例如，在 *Uncharted* 和 *The Last of Us* 系列中，水体被制作为三角形网格，但会映射一种特殊材质，用以表明它应当被当作水处理。）有时，特殊世界元素会在独立的专用工具中创建和编辑。例如，*Medal of Honor: Pacific Assault* 中的高度场地形，是使用从 Electronic Arts 内部另一个团队获得的工具的定制版本制作的，因为这种做法比尝试将地形编辑器集成到 Radiant 中更加方便；Radiant 是该项目当时使用的世界编辑器。
 
+<a id="figure-166"></a>
 ![Figure 16.6. The Sandbox editor for CRYENGINE.](../../assets/images/volume-02/chapter-16/figure-16-6-sandbox-editor-cryengine.png)
 
 **Figure 16.6.** CRYENGINE 的 Sandbox 编辑器。
@@ -62,6 +65,7 @@
 
 大多数世界编辑器都会在一个可滚动的属性网格视图中显示当前选中对象的属性。Figure 16.7 展示了一个属性网格示例。该网格允许用户查看每个属性的当前值，并通过键入、使用复选框或下拉组合框、上下拖动微调控件等方式编辑这些值。
 
+<a id="figure-167"></a>
 ![Figure 16.7. A typical property grid.](../../assets/images/volume-02/chapter-16/figure-16-7-typical-property-grid.png)
 
 **Figure 16.7.** 一个典型的属性网格。
@@ -89,7 +93,7 @@
 - **光源**（lights）。世界编辑器通常会使用特殊图标来表示光源，因为它们没有网格。编辑器也可能尝试显示光源对场景几何体的大致影响，使设计师能够实时移动光源，并对场景最终外观形成较好的直观感受。
 - **粒子发射器**（particle emitters）。在基于独立渲染引擎构建的编辑器中，粒子效果的可视化也可能存在问题。在这种情况下，粒子发射器可能只用图标显示，或者编辑器可能会尝试在编辑器中模拟粒子效果。当然，如果编辑器在游戏内运行，或者能够与正在运行的游戏通信以进行实时调节，这就不是问题。
 - **声音源**（sound sources）。正如 Chapter 15 中所讨论的，3D 渲染引擎会将声音源建模为 3D 点或体积。在世界编辑器中为这些声音源提供专门编辑工具可能会很方便。例如，如果声音设计师能够可视化全向声音发射器的最大半径，或者可视化定向发射器的方向向量和锥体范围，就会很有帮助。
-- **区域**（regions）。区域是游戏用来检测相关事件的一段空间体积，例如检测对象进入或离开该体积，或为各种目的划定区域。有些游戏引擎将区域限制为球体或有向盒建模；另一些引擎则可能允许从上方观察时为任意凸多边形形状，但侧面严格保持水平；还有一些引擎可能允许区域由更复杂的几何体构造，例如 k-DOP（见 [Section 14.3.4.5](../14-collision-and-rigid-body-dynamics/03-the-collision-detection-system.md#14345-k-dops)）。如果区域始终是球形的，那么设计师也许只需要在属性网格中使用一个“Radius”属性即可；但如果要定义或修改任意形状区域的范围，几乎必然需要一个特殊情况编辑工具。
+- **区域**（regions）。区域是游戏用来检测相关事件的一段空间体积，例如检测对象进入或离开该体积，或为各种目的划定区域。有些游戏引擎将区域限制为球体或有向盒建模；另一些引擎则可能允许从上方观察时为任意凸多边形形状，但侧面严格保持水平；还有一些引擎可能允许区域由更复杂的几何体构造，例如 k-DOP（见 [Section 14.3.4.5](../14-collision-and-rigid-body-dynamics/03-the-collision-detection-system.md#14345-离散有向多面体dop)）。如果区域始终是球形的，那么设计师也许只需要在属性网格中使用一个“Radius”属性即可；但如果要定义或修改任意形状区域的范围，几乎必然需要一个特殊情况编辑工具。
 - **样条曲线**（splines）。样条曲线是一条三维曲线，由一组控制点定义，并且根据所使用的数学曲线类型，可能还会在这些点上定义切向量。Catmull-Rom 样条曲线很常用，因为它们完全由一组控制点定义（不需要切线），并且曲线总会穿过所有控制点。不过，无论支持哪种样条曲线，世界编辑器通常都需要提供在其视口中显示样条曲线的能力，并且用户必须能够选择和操纵单个控制点。有些世界编辑器实际上支持两种选择模式：一种是用于选择场景中对象的“粗粒度”模式，另一种是用于选择已选对象内部单个组成部分的“细粒度”模式，例如样条曲线的控制点或区域的顶点。
 - **AI 导航网格**（nav meshes for AI）。在许多游戏中，NPC 会在游戏世界的可导航区域内运行寻路算法来进行导航。这些可导航区域必须被定义，而世界编辑器通常在允许 AI 设计师创建、可视化和编辑这些区域方面发挥核心作用。例如，导航网格是一个 2D 三角形网格，它为可导航区域的边界提供简单描述，同时也向寻路器提供连通性信息。
 - **其他自定义数据**（other custom data）。当然，每款游戏都有其自身特定的数据需求。世界编辑器可能需要为这些数据提供自定义可视化和编辑设施。示例包括：描述游玩空间中“可供性”（affordances）的数据（窗户、门口、可能的攻击点或防御点），供 AI 系统使用；或者描述掩体点、可抓取边缘等内容的几何特征，供玩家角色和/或 NPC 使用。
@@ -104,20 +108,22 @@
 
 ### 16.4.2 集成式资源管理工具
 
-在某些引擎中，游戏世界编辑器会与游戏资源数据库管理的其他方面集成在一起，例如定义网格和材质属性、定义动画、混合树、动画状态机，设置对象的碰撞和物理属性，管理纹理资源，等等。（关于游戏资源数据库的讨论，见 [Section 7.2.1.2](../../volume-01-foundations-and-core-engine-systems/07-resources-and-the-file-system/02-the-resource-manager.md#7212-游戏资源数据库)。）
+在某些引擎中，游戏世界编辑器会与游戏资源数据库管理的其他方面集成在一起，例如定义网格和材质属性、定义动画、混合树、动画状态机，设置对象的碰撞和物理属性，管理纹理资源，等等。（关于游戏资源数据库的讨论，见 [Section 7.2.1.2](../../volume-01-foundations-and-core-engine-systems/07-resources-and-the-file-system/02-the-resource-manager.md#7212-资源数据库)。）
 
 也许这种设计最著名的实际例子是 UnrealEd，即用于为基于 Unreal Engine 构建的游戏创建内容的编辑器。UnrealEd 直接集成到游戏引擎中，因此在编辑器中所做的任何修改都会直接作用于正在运行的游戏中的动态元素。这使得快速迭代非常容易实现。但 UnrealEd 远不止是一个游戏世界编辑器——它实际上是一个完整的内容创建包。它管理整个游戏资源数据库，从动画、音频片段、三角形网格、纹理，到材质和着色器，以及更多内容。UnrealEd 为用户提供了一个统一的、实时的、所见即所得（WYSIWYG）的完整资源数据库视图，使其成为任何快速高效游戏开发流程的强大支撑。Figures 16.8 和 16.9 展示了 UnrealEd 的若干截图。
 
+<a id="figure-168"></a>
 ![Figure 16.8. UnrealEd’s Content Browser provides access to the entire game asset database.](../../assets/images/volume-02/chapter-16/figure-16-8-unrealed-content-browser-game-asset-database.png)
 
 **Figure 16.8.** UnrealEd 的内容浏览器（Content Browser）提供了对整个游戏资源数据库的访问。
 
+<a id="figure-169"></a>
 ![Figure 16.9. Unreal’s world editor.](../../assets/images/volume-02/chapter-16/figure-16-9-unreal-world-editor.png)
 
 **Figure 16.9.** Unreal 的世界编辑器。
 
 #### 16.4.2.1 数据处理成本
 
-在 [Section 7.2.1](../../volume-01-foundations-and-core-engine-systems/07-resources-and-the-file-system/02-the-resource-manager.md#721-the-resource-manager) 中，我们了解到，资源调理管线（asset conditioning pipeline, ACP）会将游戏资源从各种源格式转换为游戏引擎所需的格式。这通常是一个两步过程。首先，资源从 DCC 应用程序导出为一种与平台无关的中间格式，该格式只包含与游戏相关的数据。其次，资源被处理为针对某一特定平台优化的格式。在面向多个游戏平台的项目中，单个与平台无关的资源会在第二阶段产生多个平台特定资源。
+在 [Section 7.2.1](../../volume-01-foundations-and-core-engine-systems/07-resources-and-the-file-system/02-the-resource-manager.md#721-离线资源管理与工具链) 中，我们了解到，资源调理管线（asset conditioning pipeline, ACP）会将游戏资源从各种源格式转换为游戏引擎所需的格式。这通常是一个两步过程。首先，资源从 DCC 应用程序导出为一种与平台无关的中间格式，该格式只包含与游戏相关的数据。其次，资源被处理为针对某一特定平台优化的格式。在面向多个游戏平台的项目中，单个与平台无关的资源会在第二阶段产生多个平台特定资源。
 
 不同工具管线之间的关键差异之一，在于第二个特定平台优化步骤发生在什么时间点。UnrealEd 会在资源首次导入编辑器时执行该步骤。这种方法在进行关卡设计迭代时，可以带来较快的迭代时间。不过，它也可能使修改网格、动画、音频资源等源资源的成本变得更高。Source 引擎和 Quake 引擎等其他引擎，则会在运行游戏之前烘焙关卡时支付资源优化成本。Halo 允许用户随时修改原始资源；这些资源在首次加载到引擎中时会被转换为优化后的形式，并且结果会被缓存起来，以避免每次运行游戏时都不必要地重复执行优化步骤。

@@ -16,7 +16,7 @@
 
 ### 11.2.2 眼睛与摄像机
 
-人眼由一个透镜、一个不透光的封闭区域（眼球），以及一个被称为**视网膜**（retina）的成像表面组成。视网膜由大量极小的感光神经元构成，这些神经元被称为**视杆细胞**（rods）和**视锥细胞**（cones）。当这些神经元检测到光时，它们会向大脑发送信号，使我们能够感知图像。视杆细胞和视锥细胞共同工作，使人类能够在很宽的光照条件范围内都具有良好的视觉。视锥细胞会测量它们接收到的光的强度和颜色，但对低光强并不是非常敏感。另一方面，视杆细胞在黑暗环境中工作得很好，但它们不能感知颜色。这就是为什么我们在夜晚看到的世界大多是黑白的。我们将在 [Section 11.2.3](02-lights-camera-action.md#1123-color-theory) 中精确讨论眼睛中的视锥细胞如何产生我们的颜色感知。
+人眼由一个透镜、一个不透光的封闭区域（眼球），以及一个被称为**视网膜**（retina）的成像表面组成。视网膜由大量极小的感光神经元构成，这些神经元被称为**视杆细胞**（rods）和**视锥细胞**（cones）。当这些神经元检测到光时，它们会向大脑发送信号，使我们能够感知图像。视杆细胞和视锥细胞共同工作，使人类能够在很宽的光照条件范围内都具有良好的视觉。视锥细胞会测量它们接收到的光的强度和颜色，但对低光强并不是非常敏感。另一方面，视杆细胞在黑暗环境中工作得很好，但它们不能感知颜色。这就是为什么我们在夜晚看到的世界大多是黑白的。我们将在 [Section 11.2.3](02-lights-camera-action.md#1123-色彩理论) 中精确讨论眼睛中的视锥细胞如何产生我们的颜色感知。
 
 摄像机本质上是一只人工眼睛，它的工作方式与眼睛非常相似。它由一个透镜、一个不透光的封闭区域（摄像机机身），以及一个矩形成像表面组成。在胶片相机中，入射光会与一张未显影胶片发生化学反应，从而生成一幅负片图像。
 
@@ -32,10 +32,12 @@
 
 针孔相机的问题在于，它只允许极少量的光进入摄像机外壳，这意味着需要非常长的曝光时间才能生成图像。我们可以通过增加到达感光表面的光量来缩短曝光时间。这意味着要扩大外壳上的孔洞，但这样一来，我们就需要一个**透镜**（lens）来聚焦光线。透镜是一块成形玻璃或其他透明材料，其折射率不同于空气。透镜的形状会使入射光线发生折射，从而将它们聚焦到成像表面上。[Figure 11.2](#figure-112) 展示了摄像机透镜如何聚焦光线。
 
+<a id="figure-111"></a>
 ![Figure 11.1 A pinhole camera works like a primitive lens. The pinhole serves as the focal point, and an inverted image is projected onto the imaging surface behind it.](../../assets/images/volume-02/chapter-11/figure-11-1-pinhole-camera-primitive-lens.png)
 
 **Figure 11.1.** 针孔相机的工作方式类似一个原始透镜。针孔充当焦点，倒置图像被投影到其后的成像表面上。
 
+<a id="figure-112"></a>
 ![Figure 11.2 A lens focuses incoming parallel rays of light onto a single focal point. If we place the imaging surface behind this focal point, an inverted image of the subject is projected onto it.](../../assets/images/volume-02/chapter-11/figure-11-2-lens-focuses-parallel-rays.png)
 
 **Figure 11.2.** 透镜会将入射的平行光线聚焦到单个焦点上。如果我们将成像表面放在该焦点之后，拍摄对象的倒置图像就会投影到成像表面上。
@@ -46,6 +48,7 @@
 
 由于透镜或针孔会将入射光聚焦到单个焦点上，因此摄像机只能看到周围世界的一部分。使用针孔相机来思考这个问题最简单。假设我们从摄像机成像矩形的四个角追踪射线，让它们穿过针孔并进入场景，最终会得到一个金字塔形的**观察体积**（viewing volume）。位于这个金字塔之外的任何内容都无法被摄像机成像，因为从其发出的任何光线都必然会落到成像表面的边界之外。我们也可以把观察体积看作由四个平面围成：这四个平面分别与成像表面的四条边相交，并且也在焦点处相互相交。这四个平面与摄像机中心观察方向所形成的角度，称为摄像机的**角视场**（angular field of view, FOV）。我们可以用水平角或垂直角来描述 FOV。[Figure 11.3](#figure-113) 展示了这一概念。
 
+<a id="figure-113"></a>
 ![Figure 11.3 A pinhole camera’s pyramidal viewing volume, with the vertical field of view (FOV) labeled.](../../assets/images/volume-02/chapter-11/figure-11-3-pinhole-camera-viewing-volume-fov.png)
 
 **Figure 11.3.** 针孔相机的金字塔形观察体积，其中标出了垂直视场角（FOV）。
@@ -74,10 +77,11 @@ $$
 \Phi = \frac{\mathrm{d}Q}{\mathrm{d}t}.
 $$
 
-在 [Section 11.2.3.4](#11234-luminous-power) 中，我们将介绍一个相关的量：**光通量**（luminous power）$\Phi_v$，它表示人眼会感知到的辐射功率量。这一点非常重要：像 $\Phi$ 这样的**辐射度学量**（radiometric quantities）描述的是电磁辐射的直接测量结果，而像 $\Phi_v$ 这样的**光度学量**（photometric quantities）描述的是人类对测量结果的感知。在本书中，当需要将光度学量与其辐射度学对应量区分开时，我们会使用小写的下标 “$v$”<sup>2</sup>，它代表 “as visually perceived”（视觉感知到的）。
+在 [Section 11.2.3.4](02-lights-camera-action.md#11234-光通量) 中，我们将介绍一个相关的量：**光通量**（luminous power）$\Phi_v$，它表示人眼会感知到的辐射功率量。这一点非常重要：像 $\Phi$ 这样的**辐射度学量**（radiometric quantities）描述的是电磁辐射的直接测量结果，而像 $\Phi_v$ 这样的**光度学量**（photometric quantities）描述的是人类对测量结果的感知。在本书中，当需要将光度学量与其辐射度学对应量区分开时，我们会使用小写的下标 “$v$”<sup>2</sup>，它代表 “as visually perceived”（视觉感知到的）。
 
 > **脚注 2**：注意不要将这个下标与大写的 “$V$” 下标混淆；后者用于表示观察空间中的点和向量，例如观察空间基向量 $\mathbf{i}_V$、$\mathbf{j}_V$ 和 $\mathbf{k}_V$。
 
+<a id="figure-114"></a>
 ![Figure 11.4 Spectral power plots of white sunlight (left) and a green laser (right).](../../assets/images/volume-02/chapter-11/figure-11-4-spectral-power-plots-sunlight-green-laser.png)
 
 **Figure 11.4.** 白色阳光（左）和绿色激光（右）的光谱功率图。
@@ -104,8 +108,9 @@ $$
 
 我们可以通过绘制三类视锥细胞对整个可见光谱中每一种可能波长 $\lambda$ 的响应强度，来可视化它们的响应，如 [Figure 11.5](#figure-115) 所示。我们分别将这三条曲线标记为 $S(\lambda)$、$M(\lambda)$ 和 $L(\lambda)$，对应于三类视锥细胞。这些曲线通常称为**三刺激曲线**（tristimulus curves）。人类视觉感知几乎是线性的，也就是说，我们的大脑将入射光信号的**亮度**（brightness）感知为三类视锥细胞响应之和。[Figure 11.5](#figure-115) 中还包含第四条曲线，标记为 $V(\lambda)$，它绘制的是感知亮度关于波长的变化。这条曲线几乎正好等于另外三条曲线之和。
 
-这些曲线看起来很像我们在 [Section 11.2.3.1](#11231-light-energy-and-power) 中讨论过的光谱功率图。但它们并不测量以瓦特每纳米为单位的绝对光功率。三刺激图的纵轴实际上是无量纲的，因为它表示的是相对于给定波长处三类视锥细胞合计最大响应而言，视锥细胞对入射波长的响应强度。该轴的范围从 0 到 1，其中 1 表示可能出现的最强响应。因此，$V(\lambda)$ 在 1.0 处达到最大值，而任何单独的三刺激曲线都不会单独达到 1.0。需要意识到，这幅图表示的是平均人类视锥细胞的响应。任何个体的绝对响应强度以及响应曲线形状，都可能与这个平均值不同。
+这些曲线看起来很像我们在 [Section 11.2.3.1](02-lights-camera-action.md#11231-光能与功率) 中讨论过的光谱功率图。但它们并不测量以瓦特每纳米为单位的绝对光功率。三刺激图的纵轴实际上是无量纲的，因为它表示的是相对于给定波长处三类视锥细胞合计最大响应而言，视锥细胞对入射波长的响应强度。该轴的范围从 0 到 1，其中 1 表示可能出现的最强响应。因此，$V(\lambda)$ 在 1.0 处达到最大值，而任何单独的三刺激曲线都不会单独达到 1.0。需要意识到，这幅图表示的是平均人类视锥细胞的响应。任何个体的绝对响应强度以及响应曲线形状，都可能与这个平均值不同。
 
+<a id="figure-115"></a>
 ![Figure 11.5 Response curves of the three types of cone cell as functions of wavelength, S(lambda), M(lambda), and L(lambda). Also shown is V(lambda), a curve representing our overall perception of brightness across the visible spectrum.](../../assets/images/volume-02/chapter-11/figure-11-5-cone-cell-response-curves.png)
 
 **Figure 11.5.** 三类视锥细胞随波长变化的响应曲线：$S(\lambda)$、$M(\lambda)$ 和 $L(\lambda)$。图中还显示了 $V(\lambda)$，它表示我们在整个可见光谱上的总体亮度感知。
@@ -183,6 +188,7 @@ $$
 
 一个 CIE $xyY$ 编码颜色的 $(x, y)$ 坐标，位于一个二维色度空间中。当我们绘制所有对应于真实感知颜色的这两个坐标组合时，会得到一个倾斜的马蹄形，称为该颜色空间的**色域**（gamut）。CIE $xy$ 色度色域如 [Figure 11.6](#figure-116) 所示。单色光颜色（纯波长光）沿着这个马蹄形的弯曲外边缘分布。最长可见波长（红色）位于马蹄形的右端，而最短可见波长（紫色）位于左端。马蹄形内部的每个点都表示 $x$ 和 $y$ 色度的某种特定混合，从而形成一种独特的感知颜色，例如青色、品红色、橙色、黄色等等。闭合马蹄形底部、连接最长可见波长与最短可见波长的线，称为**紫线**（line of purples）。在马蹄形中心附近的某一点上，色度会完美混合成白色。这一点称为 $xy$ 色度空间的**白点**（white point）。
 
+<a id="figure-116"></a>
 ![Figure 11.6 The CIE xy chromaticity gamut. The pure wavelengths form a horseshoe-shaped curve around the outer edge of the gamut. The line of purples connects the lowest perceivable wavelength to the highest perceivable wavelength.](../../assets/images/volume-02/chapter-11/figure-11-6-cie-xy-chromaticity-gamut.png)
 
 **Figure 11.6.** CIE $xy$ 色度色域。纯波长在色域外边缘形成马蹄形曲线。紫线连接最低可感知波长与最高可感知波长。
@@ -195,6 +201,7 @@ $$
 
 三角形 sRGB 色域只覆盖 CIE $xy$ 马蹄形色域的一部分。换句话说，并不是 CIE XYZ 系统中的所有颜色都能在 sRGB 系统中表示。幸运的是，那些被 sRGB 系统排除在外的颜色，与位于 sRGB 三角色域内部的相邻颜色在感知上并没有非常大的差异，因此这种限制不会造成显著的实际问题。
 
+<a id="figure-117"></a>
 ![Figure 11.7 The coordinates of the sRGB primaries within the CIE xy chromaticity gamut.](../../assets/images/volume-02/chapter-11/figure-11-7-srgb-primaries-cie-xy-gamut.png)
 
 **Figure 11.7.** sRGB 基色在 CIE $xy$ 色度色域中的坐标。
@@ -217,6 +224,7 @@ $$
 
 sRGB 颜色空间由 CIE 1931 $xy$ 色度空间中的一组特定色度坐标定义。也可以选择其他基色，从而得到若干不同的基于 RGB 的颜色空间。旧式模拟电视广播系统使用一种称为 **NTSC** 的颜色标准，它只覆盖了 sRGB 色域大约 35% 的范围。**DCI-P3** 颜色空间是为数字摄影机使用而设计的，它所选择的基色使其三角色域覆盖的 CIE 1931 马蹄形色域比 sRGB 略大。**Adobe RGB** 颜色空间的基色形成了一个三角形，它覆盖的可见颜色范围又比 DCI-P3 更宽。更大的色域能够更忠实地再现绿色和青色的细微色调。sRGB 仍然是最常用的标准，但像 Adobe 这样的标准常用于专业图像创作和编辑。关于各种 RGB 颜色空间优缺点的精彩讨论，见 [227]。
 
+<a id="figure-118"></a>
 ![Figure 11.8 The RGB color cube.](../../assets/images/volume-02/chapter-11/figure-11-8-rgb-color-cube.png)
 
 **Figure 11.8.** RGB 颜色立方体。

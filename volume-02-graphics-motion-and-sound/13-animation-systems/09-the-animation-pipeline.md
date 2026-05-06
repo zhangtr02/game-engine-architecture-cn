@@ -18,6 +18,7 @@
 
 6. **矩阵调色板生成**（matrix palette generation）。一旦最终全局姿态已经生成，就会将每个关节的全局姿态矩阵乘以对应的逆绑定姿态矩阵。该阶段的输出是一组适合作为输入传递给渲染引擎的蒙皮矩阵调色板。
 
+<a id="figure-1348"></a>
 ![Figure 13.48. A typical animation pipeline.](../../assets/images/volume-02/chapter-13/figure-13-48-typical-animation-pipeline.png)
 
 **Figure 13.48.** 典型动画管线。

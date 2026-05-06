@@ -20,16 +20,19 @@
 
 这些效果都可以可视化为局部时间线与某条全局时间线之间的**映射**（mapping），例如真实时间或游戏时间。为了以动画片段最初创作时的速度播放它，我们只需将动画局部时间线的起点（`t = 0`）映射到全局时间线上的目标起始时间（`τ = τ_start`）。Figure 8.1 展示了这一点。
 
+<a id="figure-81"></a>
 ![Figure 8.1 Playing an animation clip can be visualized as mapping its local timeline onto the global game timeline.](../../assets/images/volume-01/chapter-08/figure-8-1-animation-clip-local-timeline-mapped-to-global-game-timeline.png)
 
 **Figure 8.1.** 播放动画片段可以被可视化为将其局部时间线映射到全局游戏时间线。
 
 为了以半速播放动画片段，我们可以想象在映射到全局时间线之前，先将局部时间线缩放为原来的两倍。要做到这一点，我们只需在片段的全局起始时间 `τ_start` 之外，额外记录一个时间缩放系数或播放速率 `R`。Figure 8.2 展示了这一点。通过使用负的时间缩放系数（`R < 0`），片段甚至可以倒放，如 Figure 8.3 所示。
 
+<a id="figure-82"></a>
 ![Figure 8.2 Animation playback speed can be controlled by simply scaling the local timeline prior to mapping it onto the global timeline.](../../assets/images/volume-01/chapter-08/figure-8-2-animation-playback-speed-scaled-local-timeline-global-timeline.png)
 
 **Figure 8.2.** 动画播放速度可以通过在映射到全局时间线之前缩放局部时间线来控制。
 
+<a id="figure-83"></a>
 ![Figure 8.3 Playing an animation in reverse is like mapping the clip to the global timeline with a time scale of R = -1.](../../assets/images/volume-01/chapter-08/figure-8-3-animation-reverse-playback-negative-time-scale.png)
 
 **Figure 8.3.** 倒放动画相当于以 `R = -1` 的时间缩放系数将片段映射到全局时间线。

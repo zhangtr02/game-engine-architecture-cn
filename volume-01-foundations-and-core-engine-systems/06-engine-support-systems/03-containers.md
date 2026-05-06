@@ -222,12 +222,14 @@ Loki 非常强大，是一套值得研究和学习的迷人代码。不过，它
 
 - **开放哈希**（open hashing）。在使用开放哈希的哈希表中（见图 6.8），冲突通过在每个索引处存储多个键值对来解决，通常以链表形式存储。这种方法容易实现，并且不会对可存储的键值对数量施加上限。不过，每当向表中添加新的键值对时，它确实需要动态分配内存。这种冲突解决策略有时称为**封闭寻址**（closed addressing），因为表中某个条目的地址完全由其哈希后的键决定。
 
+<a id="figure-68"></a>
 ![Figure 6.8 A hash table designed around open hashing closed addressing.](../../assets/images/volume-01/chapter-06/figure-6-8-hash-table-open-hashing-closed-addressing.png)
 
 **Figure 6.8.** 围绕开放哈希（封闭寻址）设计的哈希表。
 
 - **封闭哈希**（closed hashing）。在使用封闭哈希的哈希表中（见图 6.9），冲突通过一个称为**探测**（probing）的过程解决，直到找到空槽位为止。（“探测”指的是应用一个明确定义的算法来搜索空闲槽位。）这种方法实现稍微困难一些，并且会对表中可驻留的键值对数量施加上限，因为每个槽位只能容纳一个键值对。但这种哈希表的主要优点是，它使用固定数量的内存，而且不需要动态内存分配。因此，它通常是主机游戏引擎中的不错选择。这种冲突解决策略有时称为**开放寻址**（open addressing），因为表中某个条目的地址只由其哈希后的键部分决定。
 
+<a id="figure-69"></a>
 ![Figure 6.9 A hash table designed around closed hashing open addressing.](../../assets/images/volume-01/chapter-06/figure-6-9-hash-table-closed-hashing-open-addressing.png)
 
 **Figure 6.9.** 围绕封闭哈希（开放寻址）设计的哈希表。
@@ -265,6 +267,7 @@ U32 hashFloat(float f)
 
 字符串可能是你会遇到的最常见键类型，因此了解一个“好”的字符串哈希函数尤其有帮助。表 6.1 列出了一些知名哈希算法、它们的吞吐量评级（基于基准测试测量结果，并转换为 Low、Medium 或 High 评级），以及它们在 SMHasher 测试中的分数 [203]。请注意，表中列出的相对吞吐量只用于粗略比较。影响哈希函数吞吐量的因素很多，包括运行它的硬件以及输入数据的性质。密码学哈希被故意设计得很慢，因为它们关注的是生成一种极不可能与其他输入字符串哈希值发生碰撞的哈希，并且根据给定哈希值反推出能产生该哈希的字符串在计算上极其困难。
 
+<a id="table-61"></a>
 ![Table 6.1 Comparison of well-known hashing algorithms in terms of their relative throughput and their scores on the SMHasher test.](../../assets/images/volume-01/chapter-06/table-6-1-comparison-of-well-known-hashing-algorithms.png)
 
 **Table 6.1.** 知名哈希算法的比较，包括其相对吞吐量和 SMHasher 测试分数。‡请注意，SBox 本身不是密码学哈希，但它是密码学中使用的对称密钥算法的一个组成部分。

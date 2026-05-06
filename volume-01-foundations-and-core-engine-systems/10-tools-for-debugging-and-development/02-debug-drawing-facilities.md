@@ -11,18 +11,22 @@
 - **Figure 10.3** 展示了如何使用圆来可视化 Drake 在游戏中搜索可悬挂边缘时所使用的半径。一条线显示他当前悬挂的边缘。
 - **Figure 10.4** 展示了一个被置于特殊调试模式下的 AI 角色。在这种模式下，角色的大脑实际上被关闭，开发者可以通过一个简单的抬头显示菜单完全控制该角色的移动和动作。开发者只需瞄准摄像机，就可以在游戏世界中绘制目标点，然后指示角色走、跑或冲刺到指定点。用户还可以让角色进入或离开附近的掩体、开火，等等。
 
+<a id="figure-101"></a>
 ![Figure 10.1. Visualizing the line of sight from an NPC to the player in The Last of Us: Remastered.](../../assets/images/volume-01/chapter-10/figure-10-1-npc-line-of-sight-visualization.png)
 
 **Figure 10.1.** 可视化 *The Last of Us: Remastered* 中 NPC 到玩家的视线（© 2014/TM SIE。由 Naughty Dog 开发，PlayStation 4）。
 
+<a id="figure-102"></a>
 ![Figure 10.2. Visualizing the expanding blast sphere of an explosion in the Naughty Dog engine.](../../assets/images/volume-01/chapter-10/figure-10-2-expanding-blast-sphere-visualization.png)
 
 **Figure 10.2.** 在 Naughty Dog 引擎中可视化爆炸不断扩张的爆炸球体。
 
+<a id="figure-103"></a>
 ![Figure 10.3. Spheres and vectors used in Drake’s ledge hang and shimmy system in the Uncharted series.](../../assets/images/volume-01/chapter-10/figure-10-3-ledge-hang-shimmy-debug-spheres-vectors.png)
 
 **Figure 10.3.** *Uncharted* 系列中 Drake 的悬挂边缘与横向移动系统所使用的球体和向量（© 2014/TM SIE。由 Naughty Dog 开发，PlayStation 3）。
 
+<a id="figure-104"></a>
 ![Figure 10.4. Manually controlling an NPC’s actions for debugging purposes in The Last of Us: Remastered.](../../assets/images/volume-01/chapter-10/figure-10-4-manual-npc-control-debugging.png)
 
 **Figure 10.4.** 在 *The Last of Us: Remastered* 中，为调试目的手动控制 NPC 的动作（© 2014/TM SIE。由 Naughty Dog 开发，PlayStation 4）。

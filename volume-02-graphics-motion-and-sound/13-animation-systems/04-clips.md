@@ -14,6 +14,7 @@
 
 我们可以认为每个动画片段都有一条**局部时间线**（local timeline），通常用独立变量 $t$ 表示。在片段开始时，$t = 0$；在片段结束时，$t = T$，其中 $T$ 是该片段的持续时间。变量 $t$ 的每一个唯一取值都称为一个**时间索引**（time index）。Figure 13.11 展示了一个例子。
 
+<a id="figure-1311"></a>
 ![Figure 13.11. The local timeline of an animation showing poses at selected time indices. Images courtesy of Naughty Dog, Inc., © 2014/TM SIE.](../../assets/images/volume-02/chapter-13/figure-13-11-animation-local-timeline-selected-time-indices.png)
 
 **Figure 13.11.** 一个动画的局部时间线，展示了若干选定时间索引处的姿态。图片由 Naughty Dog, Inc. 提供，© 2014/TM SIE。
@@ -22,6 +23,7 @@
 
 需要注意的是，帧显示给观看者的速率，并不一定等同于动画师创建姿态的速率。在电影动画和游戏动画中，动画师几乎从不会每隔 1/30 或 1/60 秒就为角色摆一次姿态。相反，动画师会在片段内的特定时间生成重要姿态，这些姿态称为**关键姿态**（key poses）或**关键帧**（key frames），而计算机则通过线性插值或基于曲线的插值来计算这些姿态之间的中间姿态。Figure 13.12 展示了这一点。
 
+<a id="figure-1312"></a>
 ![Figure 13.12. An animator creates a relatively small number of key poses, and the engine fills in the rest of the poses via interpolation.](../../assets/images/volume-02/chapter-13/figure-13-12-key-poses-and-interpolated-poses.png)
 
 **Figure 13.12.** 动画师创建相对较少的关键姿态，而引擎通过插值填充其余姿态。
@@ -40,8 +42,9 @@
 
 遗憾的是，术语 **frame** 在游戏行业中有不止一种常见含义。这可能导致很多混淆。有时，一个 frame 被理解为一段持续 1/30 或 1/60 秒的**时间区间**。但在其他语境中，术语 frame 则用于表示**时间中的单个点**（例如，我们可能会说角色“在第 42 帧”的姿态）。
 
-我个人更倾向于使用术语 **sample** 来指代时间中的单个点，而保留 **frame** 一词来描述持续 1/30 或 1/60 秒的时间区间。因此，例如，一个以每秒 30 帧速率创建的 1 秒动画，会包含 31 个**采样**（samples），并且持续 30 个**帧**（frames），如 Figure 13.13 所示。术语“sample”来自信号处理领域。一个连续时间信号（即函数 $f(t)$）可以通过在等间隔时间点对该信号进行采样，转换为一组离散数据点。关于采样的更多信息，见 [Section 15.3.2.1](../15-audio/03-the-technology-of-sound.md#15321-sampling)。
+我个人更倾向于使用术语 **sample** 来指代时间中的单个点，而保留 **frame** 一词来描述持续 1/30 或 1/60 秒的时间区间。因此，例如，一个以每秒 30 帧速率创建的 1 秒动画，会包含 31 个**采样**（samples），并且持续 30 个**帧**（frames），如 Figure 13.13 所示。术语“sample”来自信号处理领域。一个连续时间信号（即函数 $f(t)$）可以通过在等间隔时间点对该信号进行采样，转换为一组离散数据点。关于采样的更多信息，见 [Section 15.3.2.1](../15-audio/03-the-technology-of-sound.md#15321-模数转换脉冲编码调制)。
 
+<a id="figure-1313"></a>
 ![Figure 13.13. A one-second animation sampled at 30 frames per second is 30 frames in duration and consists of 31 samples.](../../assets/images/volume-02/chapter-13/figure-13-13-one-second-animation-30-frames-31-samples.png)
 
 **Figure 13.13.** 一个以每秒 30 帧采样的 1 秒动画，持续 30 帧，并包含 31 个采样。
@@ -50,6 +53,7 @@
 
 当一个片段被设计为反复播放时，我们称它是**循环的**（looped）。如果想象将两个 1 秒（30 帧/31 采样）的片段副本首尾相接地排列，那么第一个片段的第 31 个采样会在时间上与第二个片段的第 1 个采样完全重合，如 Figure 13.14 所示。为了让片段正确循环，我们可以看出，角色在片段结束时的姿态必须与片段开始时的姿态完全匹配。这反过来意味着，循环片段的最后一个采样（在我们的例子中为第 31 个采样）是冗余的。因此，许多游戏引擎会省略循环片段的最后一个采样。
 
+<a id="figure-1314"></a>
 ![Figure 13.14. The last sample of a looping clip coincides in time with its first sample and is, therefore, redundant.](../../assets/images/volume-02/chapter-13/figure-13-14-looping-clip-last-sample-redundant.png)
 
 **Figure 13.14.** 循环片段的最后一个采样在时间上与其第一个采样重合，因此是冗余的。
@@ -63,6 +67,7 @@
 
 有时，使用一个**归一化时间单位**（normalized time unit）$u$ 会很方便，使得无论动画持续时间 $T$ 是多少，在动画开始时都有 $u = 0$，在动画结束时都有 $u = 1$。我们有时也将归一化时间称为动画片段的**相位**（phase），因为当动画循环时，$u$ 的作用类似于正弦波的相位。Figure 13.15 展示了这一点。
 
+<a id="figure-1315"></a>
 ![Figure 13.15. An animation clip, showing normalized time units. Images courtesy of Naughty Dog, Inc., © 2014/TM SIE.](../../assets/images/volume-02/chapter-13/figure-13-15-animation-clip-normalized-time-units.png)
 
 **Figure 13.15.** 一个动画片段，展示了归一化时间单位。图片由 Naughty Dog, Inc. 提供，© 2014/TM SIE。
@@ -75,24 +80,28 @@
 
 我们可以把**播放动画**理解为：简单地将该片段的局部时间线映射到角色的全局时间线上。例如，Figure 13.16 展示了从全局时间 $\tau_{\text{start}} = 102$ 秒开始播放动画片段 A。
 
+<a id="figure-1316"></a>
 ![Figure 13.16. Playing animation clip A starting at a global time of 102 seconds.](../../assets/images/volume-02/chapter-13/figure-13-16-playing-animation-clip-a-global-time-102-seconds.png)
 
 **Figure 13.16.** 从全局时间 102 秒开始播放动画片段 A。
 
 如上所述，播放循环动画就像把无限多个片段副本首尾相接地铺放到全局时间线上。我们也可以想象让动画循环有限次数，这对应于铺放有限数量的片段副本。Figure 13.17 展示了这种情况。
 
+<a id="figure-1317"></a>
 ![Figure 13.17. Playing a looping animation corresponds to laying down multiple back-to-back copies of the clip.](../../assets/images/volume-02/chapter-13/figure-13-17-looping-animation-multiple-back-to-back-clips.png)
 
 **Figure 13.17.** 播放循环动画对应于将多个片段副本首尾相接地铺放在时间线上。
 
 对片段进行**时间缩放**会让它看起来比原始动画播放得更快或更慢。为了实现这一点，我们只需在把片段铺放到全局时间线时，对该片段的图像进行缩放。时间缩放最自然的表达方式是**播放速率**（playback rate），我们将其记为 $R$。例如，如果一个动画要以两倍速度播放（$R = 2$），那么在将该片段的局部时间线映射到全局时间线时，我们会把局部时间线缩放到正常长度的一半（$1/R = 0.5$）。Figure 13.18 展示了这一点。
 
+<a id="figure-1318"></a>
 ![Figure 13.18. Playing an animation at twice the speed corresponds to scaling its local timeline by a factor of 1/2.](../../assets/images/volume-02/chapter-13/figure-13-18-playing-animation-twice-speed-local-timeline-half.png)
 
 **Figure 13.18.** 以两倍速度播放动画，对应于将其局部时间线按 $1/2$ 的比例缩放。
 
 反向播放片段对应于使用 $-1$ 的时间缩放，如 Figure 13.19 所示。
 
+<a id="figure-1319"></a>
 ![Figure 13.19. Playing a clip in reverse corresponds to a time scale of −1.](../../assets/images/volume-02/chapter-13/figure-13-19-playing-clip-in-reverse-time-scale-minus-one.png)
 
 **Figure 13.19.** 反向播放片段对应于时间缩放为 $-1$。
@@ -154,6 +163,7 @@ $$
 
 例如，假设我们想要同步玩家角色的出拳动画与非玩家角色对应的受击反应动画。问题在于，玩家的出拳是由玩家子系统在检测到手柄按钮被按下时发起的。与此同时，非玩家角色（NPC）的受击反应动画由人工智能（AI）系统播放。如果在游戏循环中 AI 代码先于玩家代码运行，那么玩家出拳的开始与 NPC 反应的开始之间会有一帧延迟。而如果玩家代码先于 AI 代码运行，那么当 NPC 试图攻击玩家时，又会出现相反的问题。如果使用消息传递（事件）系统在两个子系统之间通信，则还可能产生额外延迟（更多细节见 [Section 17.8](../17-runtime-gameplay-systems/08-events-and-message-passing.md)）。Figure 13.20 展示了这个问题。
 
+<a id="figure-1320"></a>
 ![Figure 13.20. The order of execution of disparate gameplay systems can introduce animation synchronization problems when local clocks are used.](../../assets/images/volume-02/chapter-13/figure-13-20-local-clock-animation-synchronization-problems.png)
 
 **Figure 13.20.** 当使用局部时钟时，不同玩法系统的执行顺序可能会引入动画同步问题。
@@ -185,6 +195,7 @@ void GameLoop()
 
 当然，我们确实需要确保两个角色的全局时钟一致，但这很容易做到。我们可以调整全局起始时间，以考虑角色时钟之间的任何差异；也可以简单地让游戏中的所有角色共享一个主时钟。
 
+<a id="figure-1321"></a>
 ![Figure 13.21. A global clock approach can alleviate animation synchronization problems.](../../assets/images/volume-02/chapter-13/figure-13-21-global-clock-alleviates-animation-synchronization-problems.png)
 
 **Figure 13.21.** 全局时钟方法可以缓解动画同步问题。
@@ -193,6 +204,7 @@ void GameLoop()
 
 通常，动画数据会从 Maya 场景文件中提取出来，方法是以每秒 30 或 60 个采样的速率离散采样骨架姿态。一个采样包含骨架中每个关节的完整姿态。姿态通常以 SRT 格式存储：对于每个关节 $j$，缩放分量要么是单个浮点标量 $S_j$，要么是三元素向量 $\mathbf{S}_j = [S_{xj}\ S_{yj}\ S_{zj}]$。旋转分量当然是四元素四元数 $\mathbf{Q}_j = [Q_{xj}\ Q_{yj}\ Q_{zj}\ Q_{wj}]$。平移分量则是三元素向量 $\mathbf{T}_j = [T_{xj}\ T_{yj}\ T_{zj}]$。我们有时会说，一个动画由每个关节最多 10 个**通道**（channels）组成，这是指 $\mathbf{S}_j$、$\mathbf{Q}_j$ 和 $\mathbf{T}_j$ 的 10 个分量。Figure 13.22 展示了这一点。
 
+<a id="figure-1322"></a>
 ![Figure 13.22. An uncompressed animation clip contains 10 channels of floating-point data per sample, per joint.](../../assets/images/volume-02/chapter-13/figure-13-22-uncompressed-animation-clip-10-channels-per-sample-per-joint.png)
 
 **Figure 13.22.** 未压缩的动画片段中，每个采样、每个关节包含 10 个浮点数据通道。
@@ -227,10 +239,12 @@ struct AnimationClip
 
 动画片段中的采样实际上只是对随时间变化的连续函数的定义。你可以把它们看作每个关节 10 个标量值时间函数，或者看作每个关节两个向量值函数和一个四元数值函数。理论上，**通道函数**（channel functions）在整个片段的局部时间线上都是平滑且连续的，如 Figure 13.23 所示（显式创作的不连续情况除外，例如摄像机切换）。然而在实践中，许多游戏引擎会在采样之间进行**线性插值**，在这种情况下，实际使用的函数是底层连续函数的**分段线性近似**（piecewise linear approximations）。Figure 13.24 描绘了这种情况。
 
+<a id="figure-1323"></a>
 ![Figure 13.23. The animation samples in a clip define continuous functions over time.](../../assets/images/volume-02/chapter-13/figure-13-23-animation-samples-define-continuous-functions-over-time.png)
 
 **Figure 13.23.** 片段中的动画采样定义了随时间变化的连续函数。
 
+<a id="figure-1324"></a>
 ![Figure 13.24. Many game engines use a piecewise linear approximation when interpolating channel functions.](../../assets/images/volume-02/chapter-13/figure-13-24-piecewise-linear-approximation-channel-functions.png)
 
 **Figure 13.24.** 许多游戏引擎在插值通道函数时使用分段线性近似。
@@ -241,6 +255,7 @@ struct AnimationClip
 
 一种非常常见的做法是定义一个特殊通道，其中在不同时间索引处包含**事件触发器**（event triggers），如 Figure 13.25 所示。每当动画的局部时间索引经过其中一个触发器时，就会向游戏引擎发送一个事件，引擎可以按需做出响应。（我们将在 Chapter 17 中详细讨论事件。）事件触发器的一种常见用途，是标记动画期间某些声音或粒子效果应该在哪些时刻播放。例如，当左脚或右脚接触地面时，可以触发脚步声和一团“尘土”粒子效果。
 
+<a id="figure-1325"></a>
 ![Figure 13.25. A special event trigger channel can be added to an animation clip in order to synchronize sound effects, particle effects, and other game events with an animation.](../../assets/images/volume-02/chapter-13/figure-13-25-event-trigger-channel-synchronize-effects-and-events.png)
 
 **Figure 13.25.** 可以向动画片段添加一个特殊的事件触发通道，以便将音效、粒子效果和其他游戏事件与动画同步。
@@ -261,10 +276,12 @@ struct AnimationClip
 
 Figure 13.26 中的 UML 图展示了动画片段数据如何与游戏引擎中的骨架、姿态、网格以及其他数据接口连接。请特别注意这些类之间关系的**基数**（cardinality）和**方向**（direction）。基数显示在类之间关系箭头的头部或尾部附近——数字 1 表示该类的一个实例，而星号表示多个实例。对于任意一种角色类型，都会有一个骨架、一个或多个网格，以及一个或多个动画片段。骨架是中心性的统一元素——蒙皮会附着到骨架上，但与动画片段没有任何关系。同样，片段会针对某个特定骨架，但它们并不“知道”蒙皮网格。Figure 13.27 展示了这些关系。
 
+<a id="figure-1326"></a>
 ![Figure 13.26. UML diagram of shared animation resources.](../../assets/images/volume-02/chapter-13/figure-13-26-uml-diagram-shared-animation-resources.png)
 
 **Figure 13.26.** 共享动画资源的 UML 图。
 
+<a id="figure-1327"></a>
 ![Figure 13.27. Many animation clips and one or more meshes target a single skeleton.](../../assets/images/volume-02/chapter-13/figure-13-27-many-clips-and-meshes-target-single-skeleton.png)
 
 **Figure 13.27.** 多个动画片段以及一个或多个网格会以同一个骨架为目标。

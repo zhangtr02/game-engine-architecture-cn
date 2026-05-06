@@ -2,6 +2,7 @@
 
 **骨架**（skeleton）由一组称为**关节**（joints）的刚性部件按照层级结构组成。在游戏行业中，我们常常把“关节”（joint）和“骨骼”（bone）这两个术语互换使用，但“骨骼”这个说法其实并不准确。严格来说，关节才是动画师直接操控的对象，而骨骼只是关节之间的空白空间。举例来说，考虑 Crank the Weasel 角色模型中的骨盆关节。它本身只是一个关节，但由于它连接到另外四个关节（尾巴、脊柱，以及左右髋关节），所以这个关节看起来像是伸出了四根骨骼。Figure 13.6 更详细地展示了这一点。游戏引擎其实完全不关心骨骼——只有关节才重要。因此，每当你在行业中听到“骨骼”这个术语时，请记住，99% 的情况下，我们实际上谈论的是关节。
 
+<a id="figure-136"></a>
 ![Figure 13.6. The pelvis joint of this character connects to four other joints (tail, spine, and two legs), and so it produces four bones.](../../assets/images/volume-02/chapter-13/figure-13-6-pelvis-joint-connects-four-other-joints.png)
 
 **Figure 13.6.** 该角色的骨盆关节连接到另外四个关节（尾巴、脊柱和两条腿），因此产生了四根骨骼。
@@ -10,6 +11,7 @@
 
 如前所述，骨架中的关节构成一个层级结构或树结构。其中一个关节被选为**根节点**（root），其他所有关节都是它的子节点、孙节点，依此类推。用于蒙皮动画的典型关节层级结构看起来几乎与典型刚性层级结构完全相同。例如，一个类人角色的关节层级结构可能类似于 Figure 13.7 所示。
 
+<a id="figure-137"></a>
 ![Figure 13.7. Example of a skeletal joint hierarchy, as it would appear in Maya’s Hypergraph Hierarchy view.](../../assets/images/volume-02/chapter-13/figure-13-7-skeletal-joint-hierarchy-maya-hypergraph-view.png)
 
 **Figure 13.7.** 一个骨骼关节层级结构示例，它在 Maya 的 Hypergraph Hierarchy 视图中大致会呈现为这种形式。

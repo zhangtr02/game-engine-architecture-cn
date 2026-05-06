@@ -2,6 +2,7 @@
 
 游戏中的动态元素通常以面向对象的方式来设计。这种方法直观而自然，也能很好地映射到游戏设计师关于世界如何构成的理解之上。设计师可以想象角色、载具、漂浮的医疗包、会爆炸的油桶，以及无数其他动态对象在游戏中四处移动。因此，很自然地，我们会希望能够在游戏世界编辑器中创建并操纵这些元素。同样，程序员通常也会觉得，将动态元素实现为运行时大体上自主行动的代理（autonomous agents）是很自然的。在本书中，我们将使用**游戏对象**（game object, GO）这一术语，指代游戏世界中几乎任何动态元素。然而，这套术语在行业内绝不是标准说法。游戏对象通常也被称为**实体**（entities）、**演员**（actors）或**代理**（agents），类似术语还有很多。
 
+<a id="figure-163"></a>
 ![Figure 16.3. Gameplay objectives are typically arranged in a sequence, a tree, or a generalized graph, and each one maps to one or more game world chunks.](../../assets/images/volume-02/chapter-16/figure-16-3-gameplay-objectives-and-world-chunks.png)
 
 **Figure 16.3.** 玩法目标通常被组织成序列、树或广义图结构，并且每个目标都会映射到一个或多个游戏世界分块。
@@ -23,7 +24,7 @@
 
 ### 16.2.2 工具侧设计与运行时设计
 
-通过世界编辑器呈现给设计师的对象模型（将在 [Section 16.4](04-the-game-world-editor.md#164-the-game-world-editor) 中讨论）不一定与运行时用于实现游戏的对象模型相同。
+通过世界编辑器呈现给设计师的对象模型（将在 [Section 16.4](04-the-game-world-editor.md#164-游戏世界编辑器) 中讨论）不一定与运行时用于实现游戏的对象模型相同。
 
 - 工具侧游戏对象模型在运行时可能使用一种完全没有原生面向对象特性的语言来实现，例如 C。
 - 工具侧的单个 GO 类型，在运行时可能会被实现为一组类的集合，而不是人们一开始可能预期的单个类。

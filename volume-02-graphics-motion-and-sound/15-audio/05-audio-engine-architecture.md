@@ -6,10 +6,12 @@
 
 - **硬件**（hardware）不可避免地构成这一结构的基础。它至少要提供必要的电路，用于驱动数字或模拟扬声器输出，把 PC 或游戏主机连接到耳机、电视或环绕声家庭影院系统。音频硬件还可以通过在硅芯片中提供编解码器、混音器、混响槽、效果单元、波形合成器和/或 DSP 芯片，为位于栈上层的软件提供“加速”。这种硬件通常被称为**声卡**（sound card），因为 PC 有时会通过一块插入式外设卡来提供音频能力。
 
+<a id="figure-1537"></a>
 ![Figure 15.37. The audio hardware/software stack.](../../assets/images/volume-02/chapter-15/figure-15-37-audio-hardware-software-stack.png)
 
 **Figure 15.37.** 音频硬件/软件“栈”。
 
+<a id="figure-1538"></a>
 ![Figure 15.38. The legendary Focusrite Studio Console, a multi-channel mixer console with support for 72 inputs and 48 outputs.](../../assets/images/volume-02/chapter-15/figure-15-38-focusrite-studio-console-multi-channel-mixer-console.png)
 
 **Figure 15.38.** 传奇的 Focusrite Studio Console，一台支持 72 路输入和 48 路输出的多通道调音台。
@@ -33,6 +35,7 @@
 
 显然，我们可以把 3D 音频渲染过程看作一条**流水线**（pipeline）。而且，由于一个游戏世界通常同时包含大量声源，多条流水线会同时运行。因此，音频处理流水线有时被称为**音频处理图**（audio processing graph）。它本质上是由相互连接的组件组成的图，最终汇聚为少量扬声器通道，构成最终的混合、声像定位输出。Figure 15.39 展示了音频图的高层视图。
 
+<a id="figure-1539"></a>
 ![Figure 15.39. The audio processing graph (pipeline).](../../assets/images/volume-02/chapter-15/figure-15-39-audio-processing-graph-pipeline.png)
 
 **Figure 15.39.** 音频处理图（流水线）。
@@ -60,6 +63,7 @@
 
 构成音频图的各组件之间的连接称为**总线**（buses）。在电子学中，总线是一种电路，其主要用途是把其他电路相互连接起来。在软件中，总线不过是一种逻辑构造，用于描述组件之间存在互连关系。
 
+<a id="figure-1540"></a>
 ![Figure 15.40. The pipeline through which an individual 3D voice passes on its way through the audio graph.](../../assets/images/volume-02/chapter-15/figure-15-40-individual-3d-voice-pipeline-through-audio-graph.png)
 
 **Figure 15.40.** 单个 3D 声部在音频图中经过的流水线。
@@ -128,6 +132,7 @@ Figure 15.40 展示了单个 3D 声部在由音频引擎渲染时所经过的组
 
 理解这些算法的功能需要信号处理理论（见 Section 15.2），完整讨论超出了本书范围。不过，在某些简单情况下，这个概念很容易理解。例如，如果要把采样率翻倍，可以对相邻样本进行插值，并插入这些值作为新样本，从而使样本数量翻倍。但它并不像这听起来那么简单——必须注意避免在结果信号中引入混叠等问题。关于采样率转换的详细讨论见 [366]。
 
+<a id="figure-1541"></a>
 ![Figure 15.41. A typical master output bus.](../../assets/images/volume-02/chapter-15/figure-15-41-typical-master-output-bus.png)
 
 **Figure 15.41.** 典型的主输出总线。

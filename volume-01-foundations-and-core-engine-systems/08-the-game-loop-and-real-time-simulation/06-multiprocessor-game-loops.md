@@ -18,6 +18,7 @@
 
 一种分解游戏循环以实现并发的简单方式，是将特定引擎子系统分配到独立线程中运行。例如，渲染引擎、碰撞与物理模拟、动画流水线以及音频引擎都可以各自分配到自己的线程。一个主线程会控制并同步这些次级子系统线程的操作，同时也继续处理游戏高层逻辑的主要部分（主游戏循环）。在拥有多个物理 CPU 的硬件平台上，这种设计将允许这些线程化引擎子系统彼此并行执行，并与主游戏循环并行执行。这是**任务并行**的一个简单例子，如 Figure 8.4 所示。
 
+<a id="figure-84"></a>
 ![Figure 8.4 One thread per major engine subsystem.](../../assets/images/volume-01/chapter-08/figure-8-4-one-thread-per-major-engine-subsystem.png)
 
 **Figure 8.4.** 每个主要引擎子系统一个线程。
@@ -44,6 +45,7 @@
 
 给定一个包含 `N` 个需要处理的数据项的数据集，主线程会将工作划分为 `m` 批，每批大约包含 `N / m` 个元素。（`m` 的值通常会根据系统中可用核心数量来确定，不过如果我们希望留出一些核心用于其他工作，这也未必一定如此。）然后，主线程会生成 `m` 个工作线程，并为每个线程提供起始索引和数量，使其能够处理被分配的数据子集。每个工作线程可能会原地更新数据项；或者（通常更好）将输出数据写入单独的预分配缓冲区（每个工作线程一个）。
 
+<a id="figure-85"></a>
 ![Figure 8.5 Scatter/gather used to parallelize selected CPU-intensive parts of the game loop.](../../assets/images/volume-01/chapter-08/figure-8-5-scatter-gather-parallelize-cpu-intensive-game-loop.png)
 
 **Figure 8.5.** 使用分散/收集来并行化游戏循环中选定的 CPU 密集型部分。
@@ -72,6 +74,7 @@
 
 作业可以被任意细粒度地划分，而在真实游戏引擎中，许多作业彼此独立。正如 Figure 8.6 所示，这些事实有助于最大化处理器利用率。这种架构还可以自然扩展到拥有任意数量 CPU 核心的硬件。
 
+<a id="figure-86"></a>
 ![Figure 8.6 In a job model, work is broken down into fine-grained chunks that can be picked up by any available processor. This can help maximize processor utilization while providing the main game loop with improved flexibility.](../../assets/images/volume-01/chapter-08/figure-8-6-job-model-fine-grained-work-processor-utilization.png)
 
 **Figure 8.6.** 在作业模型中，工作被分解为细粒度块，可由任何可用处理器拾取。这有助于最大化处理器利用率，同时为主游戏循环提供更高灵活性。
@@ -234,6 +237,7 @@
 
 作业会根据其功能进行颜色编码，因此用户可以快速定位某个特定作业。例如，假设我们正在寻找一个耗时特别长的射线投射。如果射线投射作业被标成红色，我们就可以在显示中直观扫描所有宽度超出预期的红色作业。点击某个作业会使所有非同类型作业都以灰色绘制，从而便于查看所选作业类型的所有作业。此外，当点击一个作业时，细线会将它连接到它所启动的作业，以及启动它的那个作业。将鼠标悬停在某个作业上，或悬停在它下方调用栈中的某个函数上，会弹出一些文本，显示该作业或函数的名称，以及它的执行时间（毫秒）。
 
+<a id="figure-87"></a>
 ![Figure 8.7 The job system used in Uncharted: The Lost Legacy offers a visualization tool that shows which jobs ran on each core over the course of a given frame.](../../assets/images/volume-01/chapter-08/figure-8-7-uncharted-lost-legacy-job-system-visualization-tool.png)
 
 **Figure 8.7.** *Uncharted: The Lost Legacy* 中使用的作业系统（© 2017/TM SIE，由 Naughty Dog 开发，PlayStation 4），以及 Naughty Dog 其他 PS4 和 PS5 游戏中的作业系统，都提供了一个可视化工具，用于显示给定帧期间哪些作业运行在哪个核心上。时间从左向右递增。作业由每个核心时间线上的细框表示。每个作业调用的函数则以额外细框显示在其下方。

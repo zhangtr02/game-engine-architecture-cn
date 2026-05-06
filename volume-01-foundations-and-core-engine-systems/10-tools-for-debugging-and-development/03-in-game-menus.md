@@ -13,6 +13,7 @@
 
 下面我们简要看一下 Naughty Dog 引擎中的菜单系统是如何工作的。Figure 10.5 展示了顶层菜单。它包含了引擎中每个主要子系统的子菜单。在 Figure 10.6 中，我们向下进入了一级 **Rendering...** 子菜单。由于渲染引擎是一个高度复杂的系统，因此它的菜单中包含了许多用于控制渲染各个方面的子菜单。为了控制 3D 网格的渲染方式，我们继续向下进入 **Mesh Options...** 子菜单，如 Figure 10.7 所示。在这个菜单中，我们可以关闭所有静态背景网格的渲染，只留下动态前景网格可见。这如 Figure 10.8 所示。（啊哈，那只讨厌的鹿又出现了！）
 
+<a id="figure-105"></a>
 ![Figure 10.5 Main development menu in The Last of Us: Remastered.](../../assets/images/volume-01/chapter-10/figure-10-5-main-development-menu.png)
 
 **Figure 10.5.** *The Last of Us: Remastered* 中的主开发菜单（© 2014/™ SIE。由 Naughty Dog 创建并开发，PlayStation 4）。
@@ -21,18 +22,22 @@
 
 如今，许多游戏团队都会使用第三方图形用户界面库，为引擎添加菜单和其他调试设施。一个流行的选择是 **Dear ImGui**。它是一个**立即模式 GUI 库**（immediate mode GUI library），这意味着程序员通过调用函数来构建用户界面。例如，要在屏幕上绘制一个可调整大小的窗口，你需要每帧调用 `ImGui::Begin()` 和 `ImGui::End()`。要向窗口中填充控件，则在 `ImGui::Begin()` 和 `ImGui::End()` 调用之间调用更多 ImGui 函数，例如用 `ImGui::Text()` 向窗口添加标签，或者用 `ImGui::BeginMenuBar()` 构建菜单栏。只要你希望 UI 显示在屏幕上，这些函数就要每帧调用。Figure 10.9 展示了一个简单的 ImGui 对话框，下面的代码展示了如何将其绘制到屏幕上。你可以在 https://github.com/ocornut/imgui 阅读更多关于 ImGui 的内容，并下载它供自己使用。
 
+<a id="figure-106"></a>
 ![Figure 10.6 Rendering submenu in The Last of Us: Remastered.](../../assets/images/volume-01/chapter-10/figure-10-6-rendering-submenu.png)
 
 **Figure 10.6.** *The Last of Us: Remastered* 中的渲染子菜单（© 2014/™ SIE。由 Naughty Dog 创建并开发，PlayStation 4）。
 
+<a id="figure-107"></a>
 ![Figure 10.7 Mesh options submenu in The Last of Us: Remastered.](../../assets/images/volume-01/chapter-10/figure-10-7-mesh-options-submenu.png)
 
 **Figure 10.7.** *The Last of Us: Remastered* 中的网格选项子菜单（© 2014/™ SIE。由 Naughty Dog 创建并开发，PlayStation 4）。
 
+<a id="figure-108"></a>
 ![Figure 10.8 Background meshes turned off.](../../assets/images/volume-01/chapter-10/figure-10-8-background-meshes-turned-off.png)
 
 **Figure 10.8.** 关闭背景网格后的效果（*The Last of Us: Remastered*，© 2014/™ SIE。由 Naughty Dog 创建并开发，PlayStation 4）。
 
+<a id="figure-109"></a>
 ![Figure 10.9 A simple dialog box built with Dear ImGui.](../../assets/images/volume-01/chapter-10/figure-10-9-simple-dear-imgui-dialog-box.png)
 
 **Figure 10.9.** 使用 Dear ImGui 构建的简单对话框。来源：https://github.com/ocornut/imgui。

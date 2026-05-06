@@ -118,18 +118,21 @@
 
 为了在显式并行计算机中充分利用 CPU 资源，我们希望系统的 DOP 匹配或超过可用核心数。如果软件的 DOP 恰好等于核心数量，就可以获得最大吞吐量。当系统的 DOP 高于核心数量时，吞吐量会降低，因为某些作业必须串行运行，但没有核心处于空闲状态。可是，当系统 DOP 低于核心数量时，某些核心就没有任何工作可做。
 
+<a id="figure-1717"></a>
 ![Figure 17.17. Three job dependency trees. The nodes of the tree are jobs, and the arrows represent dependencies between them. The number of leaves in such a tree indicates the system’s degree of parallelism (DOP).](../../assets/images/volume-02/chapter-17/figure-17-17-job-dependency-trees-degree-of-parallelism.png)
 
 **Figure 17.17.** 三个作业依赖树。树中的节点是作业，箭头表示它们之间的依赖关系。树中叶节点的数量表示系统的并行度（DOP）。
 
 每当某个作业被迫等待其依赖的其他作业完成时，系统中就会引入一个**同步点**（synchronization point，简称 sync point）。每个同步点都代表一次宝贵 CPU 资源可能被浪费的机会，因为一个作业会等待其依赖作业完成工作。Figure 17.18 展示了这一点。
 
+<a id="figure-1718"></a>
 ![Figure 17.18. A synchronization point is introduced whenever one job is dependent upon the completion of one or more other jobs. Here, job D depends on job C, and job F depends on jobs A, B, D, and E.](../../assets/images/volume-02/chapter-17/figure-17-18-synchronization-points-job-dependencies.png)
 
 **Figure 17.18.** 每当一个作业依赖一个或多个其他作业完成时，就会引入同步点。这里，作业 D 依赖作业 C，作业 F 依赖作业 A、B、D 和 E。
 
 为了最大化硬件利用率，我们可以尝试通过减少作业之间的依赖来提高系统的 DOP。也可以尝试在空闲期间寻找其他无关工作来执行。我们还可以通过**推迟**（deferring）同步点来减少或消除同步点的影响。例如，假设作业 D 必须等到作业 A、B 和 C 都完成后才能开始工作。如果我们试图在 A、B 和 C 全部完成之前调度作业 D，那么它显然必须空闲等待一段时间。但如果我们推迟作业 D，使其在 A、B 和 C 完成很久之后才运行，那么就可以确信 D 永远不必等待。Figure 17.19 展示了这一思想。在题为 “Diving Down the Concurrency Rabbit Hole” [391] 的演讲中，Mike Acton 说：“并发优化设计的秘诀是延迟。”他谈的正是这一点：通过推迟同步点，减少或消除并发系统中的空闲时间。
 
+<a id="figure-1719"></a>
 ![Figure 17.19. Job D depends on jobs A, B, and C. Top: If we attempt to schedule job D immediately after job C on Core 2, the core will sit idle waiting for job B to complete. Bottom: If we delay job D’s invocation until well after jobs A, B, and C have completed, we free up Core 2 to run other jobs, thereby avoiding the idle time that had been caused by the sync point.](../../assets/images/volume-02/chapter-17/figure-17-19-delaying-sync-points-to-avoid-idle-time.png)
 
 **Figure 17.19.** 作业 D 依赖作业 A、B 和 C。上图：如果试图在 Core 2 上紧接作业 C 之后调度作业 D，该核心会空闲等待作业 B 完成。下图：如果将作业 D 的调用推迟到作业 A、B 和 C 都完成较久之后，就可以释放 Core 2 去运行其他作业，从而避免同步点造成的空闲时间。
@@ -144,7 +147,7 @@
 
 如果游戏引擎拥有作业系统，它很可能会被用于并行化引擎中的各种底层子系统，例如动画、音频、碰撞/物理、渲染、文件 I/O 等。那么，为什么不也通过把游戏对象更新变成作业，来并行化游戏对象更新呢？这正是 Naughty Dog 引擎所采用的方法。它可以工作，但要正确且高效地运行起来，并非易事。
 
-我们在 [Section 17.6.3.2](#17632-分桶更新) 中讨论过，由于游戏对象之间存在依赖，我们需要控制它们的更新顺序。实现这一点的一种方式，是将游戏中的所有对象划分到 `N` 个桶中，使桶 `B` 中的对象只依赖桶 `0` 到 `B − 1` 中的对象。如果采用这种方法，就可以通过将每个桶中的所有游戏对象启动为作业来更新它们，并让作业系统将这些作业调度到可用核心上（同时与当时正在运行的其他作业交错执行）。这大致就是 Naughty Dog 引擎采用的技术。
+我们在 [Section 17.6.3.2](06-updating-game-objects-in-real-time.md#17632-分桶更新) 中讨论过，由于游戏对象之间存在依赖，我们需要控制它们的更新顺序。实现这一点的一种方式，是将游戏中的所有对象划分到 `N` 个桶中，使桶 `B` 中的对象只依赖桶 `0` 到 `B − 1` 中的对象。如果采用这种方法，就可以通过将每个桶中的所有游戏对象启动为作业来更新它们，并让作业系统将这些作业调度到可用核心上（同时与当时正在运行的其他作业交错执行）。这大致就是 Naughty Dog 引擎采用的技术。
 
     void UpdateBucket(int iBucket)
     {
@@ -167,7 +170,7 @@
 
 #### 17.7.4.2 异步游戏对象更新
 
-我们在 [Section 17.7.1](#1771-并发引擎子系统) 中说过，游戏对象更新通常以异步方式完成。例如，我们不再调用一个阻塞函数来投射射线，而是发起一个异步射线投射请求，碰撞子系统会在这一帧未来的某个时刻处理该请求。在这一帧的后续阶段，或下一帧中，我们会取得射线投射结果并对其采取行动。
+我们在 [Section 17.7.1](07-concurrent-game-object-updates.md#1771-并发引擎子系统) 中说过，游戏对象更新通常以异步方式完成。例如，我们不再调用一个阻塞函数来投射射线，而是发起一个异步射线投射请求，碰撞子系统会在这一帧未来的某个时刻处理该请求。在这一帧的后续阶段，或下一帧中，我们会取得射线投射结果并对其采取行动。
 
 当游戏对象本身也在并发更新（跨多个核心）时，这种方法仍然可以很好地工作。不过，如果我们的作业系统基于**用户级线程**（user-level threads，如协程或纤程），那么阻塞调用也会成为一种可行选择。这之所以可行，是因为协程具有一个独特属性：它能够**让出**（yield）执行权给另一个协程，然后在稍后的某个时间点，从上次离开的地方继续执行（当另一个协程又让出执行权回到它时）。在基于纤程的作业系统中（例如 Naughty Dog 引擎使用的系统），作业本身并不是严格意义上的协程，但它们具有同样的属性：一个基于纤程的作业能够在执行中途“睡眠”，随后再被“唤醒”，从暂停处继续执行。
 
@@ -195,8 +198,9 @@
         // ...
     }
 
-请注意，这种实现看起来几乎与我们在 [Section 17.7.2](#1772-异步程序设计) 中展示的“不要这样做”的例子完全相同！得益于用户级线程，我们的作业毕竟可以使用阻塞函数调用。Figure 17.20 展示了正在发生的事情：这个作业实际上被切成了两部分——阻塞射线投射调用之前运行的部分，以及之后运行的部分。
+请注意，这种实现看起来几乎与我们在 [Section 17.7.2](07-concurrent-game-object-updates.md#1772-异步程序设计) 中展示的“不要这样做”的例子完全相同！得益于用户级线程，我们的作业毕竟可以使用阻塞函数调用。Figure 17.20 展示了正在发生的事情：这个作业实际上被切成了两部分——阻塞射线投射调用之前运行的部分，以及之后运行的部分。
 
+<a id="figure-1720"></a>
 ![Figure 17.20. If our job system is implemented with user-level threads, a job can be interrupted part-way through its execution in order to perform an asynchronous operation, and resumed once that operation has been completed.](../../assets/images/volume-02/chapter-17/figure-17-20-user-level-thread-job-interrupted-and-resumed.png)
 
 **Figure 17.20.** 如果作业系统使用用户级线程实现，作业可以在执行中途被中断，以执行异步操作，并在该操作完成后恢复执行。
@@ -217,7 +221,7 @@
 
 分析真实游戏引擎中游戏对象之间的相互依赖后，我们可以作出一个观察：游戏对象更新期间，绝大多数游戏对象之间的交互都是**状态查询**。换句话说，游戏对象 A 会访问并查询游戏对象 B、C 等的当前状态。当游戏对象 A 这样做时，它实际上只需要访问这些其他游戏对象状态的**只读副本**。它不需要与对象本身交互（这些对象在这种交互发生时，可能正在并发更新，也可能没有）。
 
-基于这一情况，为每个游戏对象提供其相关状态信息的**快照**（snapshot）是合理的——也就是一个只读副本，系统中的任何其他游戏对象都可以查询它，而无需锁，也不必担心数据竞争。快照实际上只是我们在 [Section 17.6.3.4](#17634-对象状态缓存) 中描述的**状态缓存**技术的一个例子。在 Naughty Dog，我们将这种方法用于 *The Last of Us: Remastered*、*Uncharted 4: A Thief’s End*、*Uncharted: The Lost Legacy* 和 *The Last of Us Part II*。
+基于这一情况，为每个游戏对象提供其相关状态信息的**快照**（snapshot）是合理的——也就是一个只读副本，系统中的任何其他游戏对象都可以查询它，而无需锁，也不必担心数据竞争。快照实际上只是我们在 [Section 17.6.3.4](06-updating-game-objects-in-real-time.md#17634-对象状态缓存) 中描述的**状态缓存**技术的一个例子。在 Naughty Dog，我们将这种方法用于 *The Last of Us: Remastered*、*Uncharted 4: A Thief’s End*、*Uncharted: The Lost Legacy* 和 *The Last of Us Part II*。
 
 下面是 Naughty Dog 引擎中快照的工作方式：在每次桶更新开始时，我们要求每个游戏对象更新自己的快照。这些更新绝不会查询其他游戏对象的状态，因此它们可以无锁并发运行。所有快照更新完成后，我们会启动并发作业来更新游戏对象的内部状态。这些作业同样并发运行。当桶 `B` 中的某个游戏对象需要查询另一个对象的状态时，它现在有三个选项：
 

@@ -10,6 +10,7 @@
 
 赛璐珞动画的电子等价形式是一种称为**精灵动画**（sprite animation）的技术。**精灵**（sprite）是一张小型位图，它可以叠加在全屏背景图像之上而不破坏背景，通常借助专用图形硬件进行绘制。因此，精灵之于 2D 游戏动画，就如同赛璐珞片之于传统动画。这项技术是 2D 游戏时代的核心方法。Figure 13.1 展示了一组著名的精灵位图序列，几乎所有 Mattel Intellivision 游戏都会使用它来产生类人角色奔跑的错觉。这组帧被设计成即使无限重复播放也能平滑运动——这称为**循环动画**（looping animation）。按照现代说法，这个具体动画会被称为**奔跑循环**（run cycle），因为它使角色看起来正在奔跑。角色通常拥有若干循环动画周期，包括各种待机循环、行走循环和奔跑循环。
 
+<a id="figure-131"></a>
 ![Figure 13.1. The sequence of sprite bitmaps used in most Intellivision games.](../../assets/images/volume-02/chapter-13/figure-13-1-sprite-bitmaps-intellivision-games.png)
 
 **Figure 13.1.** 大多数 Intellivision 游戏中使用的精灵位图序列。
@@ -22,10 +23,12 @@
 
 刚性层级技术的主要问题在于，由于关节处会出现“裂缝”（cracking），角色身体的表现通常并不令人满意。Figure 13.3 展示了这一点。刚性层级动画非常适合机器人和确实由刚性部件构成的机械装置，但当它被用于“有血有肉”的角色时，经不起仔细观察。
 
+<a id="figure-132"></a>
 ![Figure 13.2. A typical skeletal hierarchy for a bipedal character.](../../assets/images/volume-02/chapter-13/figure-13-2-typical-skeletal-hierarchy-bipedal-character.png)
 
 **Figure 13.2.** 双足角色的典型骨骼层级结构。
 
+<a id="figure-133"></a>
 ![Figure 13.3. Cracking at the joints is a big problem in rigid hierarchical animation.](../../assets/images/volume-02/chapter-13/figure-13-3-cracking-at-joints-rigid-hierarchical-animation.png)
 
 **Figure 13.3.** 关节处出现裂缝是刚性层级动画中的一个严重问题。
@@ -36,6 +39,7 @@
 
 实现这一点的一种方法是采用一种暴力式技术，称为**逐顶点动画**（per-vertex animation）。在这种方法中，网格的顶点由美术师制作动画，并导出运动数据，告诉游戏引擎在运行时如何移动每个顶点。这项技术可以产生任何可以想象的网格变形效果（唯一限制是表面的细分程度）。然而，它是一种数据密集型技术，因为必须为网格中的每个顶点存储随时间变化的运动信息。正因为如此，它很少应用于实时游戏。
 
+<a id="figure-134"></a>
 ![Figure 13.4. A set of facial morph targets for the Ellie character in The Last of Us: Remastered (© 2014/TM SIE. Created and developed by Naughty Dog, PlayStation 4).](../../assets/images/volume-02/chapter-13/figure-13-4-facial-morph-targets-ellie-the-last-of-us-remastered.png)
 
 **Figure 13.4.** 《The Last of Us: Remastered》中 Ellie 角色的一组面部变形目标（© 2014/TM SIE。由 Naughty Dog 创建并开发，PlayStation 4）。
@@ -52,6 +56,7 @@
 
 蒙皮动画最早被《超级马力欧 64》（Super Mario 64）等游戏使用，如今它仍然是最流行的技术，在游戏行业和故事片电影行业中都被广泛采用。许多著名的现代游戏和电影角色，包括《侏罗纪公园》（Jurassic Park）中的恐龙、Solid Snake（《合金装备 4》，Metal Gear Solid 4）、Gollum（《指环王》，Lord of the Rings）、Nathan Drake（《神秘海域》，Uncharted）、Buzz Lightyear（《玩具总动员》，Toy Story）、Marcus Fenix（《战争机器》，Gears of War）以及 Joel（《The Last of Us》），都全部或部分使用蒙皮动画技术进行动画制作。本章剩余部分将主要用于研究蒙皮/骨骼动画。
 
+<a id="figure-135"></a>
 ![Figure 13.5. Eric Browning’s Crank the Weasel character, with internal skeletal structure.](../../assets/images/volume-02/chapter-13/figure-13-5-crank-the-weasel-internal-skeletal-structure.png)
 
 **Figure 13.5.** Eric Browning 的角色 Crank the Weasel，以及其内部骨骼结构。

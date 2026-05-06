@@ -439,6 +439,7 @@ Guy1 的线程会让该角色走到门前，然后进入睡眠状态等待他的
 
 在这个假想脚本语言中，**信号**（signal）只是一个带名称的布尔标志。该标志初始为 false，但当线程调用 `RaiseSignal(name)` 时，具有该名称的标志值会变为 true。其他线程可以进入睡眠状态，等待某个特定命名信号变为 true。当它变为 true 时，睡眠线程就会被唤醒并继续执行。在这个例子中，两个线程使用 `"Guy1Arrived"` 和 `"Guy2Arrived"` 信号彼此同步。
 
+<a id="figure-1724"></a>
 ![Figure 17.24 Two examples showing how a simple pattern of raising one signal and then waiting on another can be used to synchronize a pair of script threads.](../../assets/images/volume-02/chapter-17/figure-17-24-script-thread-signal-synchronization.png)
 
 **Figure 17.24.** 两个示例展示了一种简单模式：先触发一个信号，再等待另一个信号，可以用来同步一对脚本线程。

@@ -10,6 +10,7 @@
 
 动态元素与静态元素的比例也会因游戏而异。大多数 3D 游戏由数量相对较少的动态元素组成，这些动态元素在相对较大的静态背景区域中移动。另一些游戏，如经典街机游戏 *Asteroids* 或 Xbox 360 复古热门作品 *Geometry Wars*，几乎没有值得一提的静态元素（除了一块黑色屏幕）。就 CPU 资源而言，游戏中的动态元素通常比静态元素更加昂贵，因此大多数 3D 游戏都会受限于只能拥有有限数量的动态元素。不过，动态元素与静态元素的比例越高，游戏世界在玩家看来就越“有生命力”。随着游戏硬件变得越来越强大，游戏正在实现越来越高的动态/静态比例。
 
+<a id="figure-161"></a>
 ![Figure 16.1. A game world from Uncharted: The Lost Legacy © 2017™ SIE. Created and developed by Naughty Dog, PlayStation 4) showing static and dynamic elements.](../../assets/images/volume-02/chapter-16/figure-16-1-uncharted-lost-legacy-static-and-dynamic-elements.png)
 
 **Figure 16.1.** 来自 *Uncharted: The Lost Legacy*（© 2017™ SIE，由 Naughty Dog 为 PlayStation 4 创作并开发）的游戏世界，展示了静态元素和动态元素。
@@ -34,6 +35,7 @@
 
 尽管现代游戏设计非常丰富，但除了最小型的游戏世界外，几乎所有游戏世界仍然会被划分为某种形式的分块。这样做有若干原因。首先，内存限制仍然是一个重要约束（而且会一直如此，直到拥有无限内存的游戏机器进入市场为止！）。世界分块也是控制游戏整体流程的一种方便机制。分块还可以作为一种分工机制；每个分块可以由一个相对较小的设计师和美术师团队来构建和管理。Figure 16.2 展示了世界分块。
 
+<a id="figure-162"></a>
 ![Figure 16.2. Many game worlds are divided into chunks for various reasons, including memory limitations, the need to control the flow of the game through the world, and as a division-of-labor mechanism during development.](../../assets/images/volume-02/chapter-16/figure-16-2-game-world-divided-into-chunks.png)
 
 **Figure 16.2.** 许多游戏世界会出于各种原因被划分为分块，包括内存限制、控制玩家在世界中推进的游戏流程，以及在开发过程中作为一种分工机制。

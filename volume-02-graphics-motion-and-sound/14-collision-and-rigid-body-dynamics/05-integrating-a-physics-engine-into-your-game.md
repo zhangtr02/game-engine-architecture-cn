@@ -6,6 +6,7 @@
 
 碰撞/物理世界中的刚体和可碰撞体，不过是抽象的数学描述而已。为了让它们在游戏语境中真正有用，我们需要以某种方式将它们与屏幕上的视觉表现连接起来。通常情况下，我们并不会直接绘制刚体（调试用途除外）。相反，刚体用于描述构成虚拟游戏世界的逻辑对象的形状、大小和物理行为。我们将在第 17 章深入讨论游戏对象，但眼下可以先依赖我们对游戏对象的直观理解——它是游戏世界中的一个逻辑实体，例如角色、载具、武器、漂浮的能量道具，等等。因此，物理世界中的刚体与其屏幕上的视觉表现之间的连接通常是间接的，其中逻辑游戏对象充当连接二者的枢纽。这一点如图 14.35 所示。
 
+<a id="figure-1435"></a>
 ![Figure 14.35. Rigid bodies are linked to their visual representations by way of game objects.](../../assets/images/volume-02/chapter-14/figure-14-35-rigid-bodies-linked-to-visual-representations-via-game-objects.png)
 
 **Figure 14.35.** 刚体通过游戏对象与其视觉表现相连接。通常还会提供一条可选的直接渲染路径，以便为了调试目的将刚体的位置可视化出来。
@@ -211,6 +212,7 @@
 
 为了在游戏世界中移动角色，大多数游戏会使用球体投射或胶囊体投射，沿期望运动方向进行探测。碰撞会被手动解析。这使我们能够做一些很酷的事情，例如：
 
+<a id="figure-1436"></a>
 ![Figure 14.36. Havok’s character controller models a character as a capsule-shaped phantom.](../../assets/images/volume-02/chapter-14/figure-14-36-havok-character-controller-capsule-phantom.png)
 
 **Figure 14.36.** Havok 的角色控制器将角色建模为胶囊形幻影体。该幻影体维护一个经过降噪处理的碰撞流形（即一组接触平面），游戏可以用它来做出运动决策。

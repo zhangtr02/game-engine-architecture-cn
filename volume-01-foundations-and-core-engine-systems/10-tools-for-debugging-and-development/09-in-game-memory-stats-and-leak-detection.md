@@ -17,10 +17,12 @@
 
 大多数专业游戏团队都会投入大量精力，创建引擎内部的内存跟踪工具，以提供准确而详细的信息。最终得到的工具通常会以多种形式输出结果。例如，引擎可能会生成一个详细转储，列出游戏在某一特定时间段内发生的所有内存分配。这些数据可能包括每个内存分配器或每个游戏系统的**高水位标记**（high water marks），指出它们所需物理 RAM 的最大数量。有些引擎还会在游戏运行时提供内存使用情况的抬头显示。这些数据可以是表格形式，如图 10.15 所示，也可以是图形形式，如图 10.16 所示。
 
+<a id="figure-1015"></a>
 ![Figure 10.15. Tabular memory statistics from Naughty Dog’s engine.](../../assets/images/volume-01/chapter-10/figure-10-15-naughty-dog-tabular-memory-statistics.png)
 
 **Figure 10.15.** Naughty Dog 引擎中的表格式内存统计信息。
 
+<a id="figure-1016"></a>
 ![Figure 10.16. A graphical memory usage display, also from The Last of Us: Remastered.](../../assets/images/volume-01/chapter-10/figure-10-16-the-last-of-us-remastered-graphical-memory-usage-display.png)
 
 **Figure 10.16.** 图形化的内存使用情况显示，同样来自《The Last of Us: Remastered》（© 2014/TM SIE。由 Naughty Dog 开发，PlayStation 4）。

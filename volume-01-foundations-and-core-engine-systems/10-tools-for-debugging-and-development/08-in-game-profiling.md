@@ -4,10 +4,12 @@
 
 通常，游戏内性能分析器允许程序员对需要计时的代码块进行标注，并为它们赋予人类可读的名称。性能分析器会通过 CPU 的高分辨率计时器测量每个被标注代码块的执行时间，并将结果存储在内存中。系统会提供一个平视显示器（heads-up display），用于显示每个代码块最新的执行时间（示例如图 10.11 和图 10.12 所示）。该显示界面通常会以多种形式提供数据，包括原始周期数、以微秒为单位的执行时间，以及相对于整个帧执行时间的百分比。
 
+<a id="figure-1011"></a>
 ![Figure 10.11. The Naughty Dog engine provides a profile hierarchy display that allows the user to drill down into particular function calls to inspect their costs.](../../assets/images/volume-01/chapter-10/figure-10-11-naughty-dog-profile-hierarchy-display.png)
 
 **Figure 10.11.** Naughty Dog 引擎提供了一种性能分析层级显示界面，允许用户下钻到特定函数调用中，以检查其开销。
 
+<a id="figure-1012"></a>
 ![Figure 10.12. The timeline mode in Uncharted: The Lost Legacy shows exactly when various operations are performed across a single frame on the PS4’s seven CPU cores.](../../assets/images/volume-01/chapter-10/figure-10-12-uncharted-lost-legacy-timeline-mode.png)
 
 **Figure 10.12.** 《神秘海域：失落的遗产》中的时间线模式展示了在 PS4 的七个 CPU 核心上，一个帧内各类操作究竟是在何时执行的。
@@ -41,6 +43,7 @@ void f() { ... }
 
 假设函数 `a()` 是直接从 `main()` 调用的，那么这个函数调用层级如图 10.13 所示。
 
+<a id="figure-1013"></a>
 ![Figure 10.13. A hypothetical function call hierarchy.](../../assets/images/volume-01/chapter-10/figure-10-13-hypothetical-function-call-hierarchy.png)
 
 **Figure 10.13.** 一个假想的函数调用层级。
@@ -57,6 +60,7 @@ _crt_startup()  ← 调用层级的根。
 
 该调用栈在图 10.14 中被描绘为一条从函数 `e()` 通向函数调用树根部的路径。
 
+<a id="figure-1014"></a>
 ![Figure 10.14. Call stack resulting from setting a breakpoint in function e().](../../assets/images/volume-01/chapter-10/figure-10-14-call-stack-breakpoint-function-e.png)
 
 **Figure 10.14.** 在函数 `e()` 中设置断点后得到的调用栈。

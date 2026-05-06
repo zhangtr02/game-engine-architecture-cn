@@ -123,6 +123,7 @@
 
 可以通过将事件参数实现为键值对来避免这个问题。每个参数都由其键唯一标识，因此参数可以以任意顺序出现，并且可选参数也可以完全省略。参数集合可以实现为闭合或开放哈希表，键被用来哈希进表；也可以实现为数组、链表或二叉搜索树形式的键值对。Table 17.1 展示了这些思想。可能性很多；只要游戏的特定需求能够被有效且高效地满足，具体实现选择在很大程度上并不重要。
 
+<a id="table-171"></a>
 ![Table 17.1. The arguments of an event object can be implemented as a collection of key-value pairs. The keys prevent order-dependency problems because each event argument is uniquely identified by its key.](../../assets/images/volume-02/chapter-17/table-17-1-event-arguments-as-key-value-pairs.png)
 
 **Table 17.1.** 事件对象的参数可以实现为键值对集合。键可以避免顺序依赖问题，因为每个事件参数都由其键唯一标识。
@@ -167,6 +168,7 @@
 
 在这些关系图中，把事件从一个对象传递到下一个对象通常很有意义。例如，当载具收到一个事件时，把该事件传递给乘坐该载具的所有乘客可能很方便；而这些乘客也可能希望把该事件转发给其物品栏中的对象。当一个多组件游戏对象收到事件时，可能需要把该事件传递给所有组件，让它们都有机会处理它。或者，当一个体育游戏中的角色收到事件时，我们可能也希望把事件传递给他的所有队友。
 
+<a id="figure-1721"></a>
 ![Figure 17.21. Game objects are interrelated in various ways, and we can draw graphs depicting these relationships. Any such graph might serve as a distribution channel for events.](../../assets/images/volume-02/chapter-17/figure-17-21-game-object-relationship-graphs-event-distribution.png)
 
 **Figure 17.21.** 游戏对象以各种方式相互关联，我们可以绘制图来表示这些关系。任何这样的图都可以作为事件的分发通道。
@@ -408,6 +410,7 @@
 
 解决这个问题的一种方法，是把事件类型从等式中移除，转而思考从一个游戏对象向另一个游戏对象发送**数据流**（streams of data）。在这样的系统中，每个游戏对象都有一个或多个**输入端口**（input ports），数据流可以连接到这些端口；也有一个或多个**输出端口**（output ports），数据可以通过这些端口发送给其他对象。只要我们有某种方法把这些端口连接在一起，例如通过图形用户界面，用橡皮筋线条把端口彼此连接起来，那么就可以构造任意复杂的行为。继续上面的例子，EMP 枪会有一个输出端口，可能命名为 `Fire`，它会发送一个布尔信号。大多数时候，该端口产生值 0（false）；但当枪开火时，它会发送一个简短的（一帧）值 1（true）脉冲。世界中的其他游戏对象拥有二进制输入端口，可以触发各种响应。动物可能有一个 `Scare` 输入，电子设备有一个 `TurnOn` 输入，植物对象有一个 `Sway` 输入。如果把 EMP 枪的 `Fire` 输出端口连接到这些游戏对象的输入端口，就可以让这把枪触发期望行为。（注意，在把枪的 `Fire` 输出连接到电子设备的 `TurnOn` 输入之前，需要先通过一个会**反转**输入的节点来传递它。这是因为我们希望电子设备在枪开火时关闭。）这个例子的连接图如 Figure 17.22 所示。
 
+<a id="figure-1722"></a>
 ![Figure 17.22. The EMP gun produces a 1 at its “Fire” output when fired. This can be connected to any input port that expects a Boolean value, in order to trigger the behavior associated with that input.](../../assets/images/volume-02/chapter-17/figure-17-22-emp-gun-data-pathway-communication-system.png)
 
 **Figure 17.22.** EMP 枪在开火时会在其 `Fire` 输出端产生 1。这个输出可以连接到任何期望布尔值的输入端口，以触发与该输入相关联的行为。
@@ -416,6 +419,7 @@
 
 各种类型的数据都可能沿数据通路发送。一些端口可能产生或期望布尔数据，另一些可能被编码为产生或期望单位浮点数形式的数据。还有一些可能操作 3D 向量、颜色、整数等。在这样的系统中，必须确保连接只在数据类型兼容的端口之间建立；否则，就必须提供某种机制，在两个不同类型端口连接时自动转换数据类型。例如，将单位浮点输出连接到布尔输入时，可能会自动使所有小于 0.5 的值转换为 false，而所有大于或等于 0.5 的值转换为 true。这正是 Unreal Engine 的 Blueprints 等基于 GUI 的事件系统的本质。Blueprints 的截图见 Figure 17.23。
 
+<a id="figure-1723"></a>
 ![Figure 17.23. Unreal Engine’s Blueprints editor.](../../assets/images/volume-02/chapter-17/figure-17-23-unreal-engine-blueprints-editor.png)
 
 **Figure 17.23.** Unreal Engine 的 Blueprints 编辑器。
