@@ -35,7 +35,7 @@ $$
 $$
 
 $$
-\mathbf{P}^{\text{skel}} = \left\{ \mathbf{P}_j \right\}_{j=0}^{N-1}.
+\mathbf{P}^{\text{skel}} = \{ \mathbf{P}_j \}_{j=0}^{N-1}.
 $$
 
 #### 13.3.2.1 关节缩放
