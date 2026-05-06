@@ -19,11 +19,11 @@
 
 ![Figure 10.15. Tabular memory statistics from Naughty Dog’s engine.](../../assets/images/volume-01/chapter-10/figure-10-15-naughty-dog-tabular-memory-statistics.png)
 
-**图 10.15.** Naughty Dog 引擎中的表格式内存统计信息。
+**Figure 10.15.** Naughty Dog 引擎中的表格式内存统计信息。
 
 ![Figure 10.16. A graphical memory usage display, also from The Last of Us: Remastered.](../../assets/images/volume-01/chapter-10/figure-10-16-the-last-of-us-remastered-graphical-memory-usage-display.png)
 
-**图 10.16.** 图形化的内存使用情况显示，同样来自《The Last of Us: Remastered》（© 2014/TM SIE。由 Naughty Dog 开发，PlayStation 4）。
+**Figure 10.16.** 图形化的内存使用情况显示，同样来自《The Last of Us: Remastered》（© 2014/TM SIE。由 Naughty Dog 开发，PlayStation 4）。
 
 此外，当低内存或内存不足情况出现时，一个优秀的引擎会尽可能以有帮助的方式提供这些信息。当开发 PC 游戏时，游戏团队通常会在比目标最低配置机器拥有更多 RAM 的高性能 PC 上工作。同样，主机游戏也会在特殊的**开发套件**（development kits）上开发，而这些开发套件的内存通常比零售版主机更多。因此，在这两种情况下，即使游戏在技术上已经耗尽了内存（即它已经无法装入零售版主机或最低配置 PC），游戏仍然可能继续运行。当这种内存不足情况出现时，游戏引擎可以显示类似这样的消息：“内存不足——此关卡无法在零售系统上运行。”
 

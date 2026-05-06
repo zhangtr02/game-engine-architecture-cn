@@ -393,7 +393,7 @@ $$
 \tag{12.30}
 $$
 
-#### Blinn-Phong 与改进 Blinn-Phong
+**Blinn-Phong 与改进 Blinn-Phong。**
 
 有些文本会把 Blinn-Phong 着色方程写成如下形式：
 

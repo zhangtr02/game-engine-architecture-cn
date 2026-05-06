@@ -27,7 +27,7 @@
 
 **Figure 10.4.** 在 *The Last of Us: Remastered* 中，为调试目的手动控制 NPC 的动作（© 2014/TM SIE。由 Naughty Dog 开发，PlayStation 4）。
 
-### 10.2.1 调试绘图 API
+### 10.2.1 调试绘图接口
 
 调试绘图 API 通常需要满足以下要求：
 

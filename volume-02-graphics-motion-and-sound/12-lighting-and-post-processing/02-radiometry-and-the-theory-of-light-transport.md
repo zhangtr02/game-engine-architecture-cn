@@ -64,11 +64,11 @@ $$
 
 #### 12.2.3.1 射线方向的表示
 
-在射线的参数方程中，射线的**方向**由单位向量 $\mathbf{u}$ 表示，并使用笛卡尔坐标表达。射线方向也可以使用**球坐标**（spherical coordinates）中的一对角度来表示。这些角度告诉我们如何将切线空间中的法线向量 $\mathbf{n}$ 变换为射线的方向向量 $\mathbf{u}$。**极角**（polar angle）$\theta$ 描述的是围绕切线空间 $y$ 轴对法线向量进行旋转，使其从竖直方向倾斜开来。[^1] **方位角**（azimuthal angle）$\varphi$ 描述的是围绕法线方向（即切线空间 $z$ 轴）对这个新的倾斜向量进行旋转，以对齐到所需的射线方向 $\mathbf{u}$。Figure 12.6 展示了球坐标。
+在射线的参数方程中，射线的**方向**由单位向量 $\mathbf{u}$ 表示，并使用笛卡尔坐标表达。射线方向也可以使用**球坐标**（spherical coordinates）中的一对角度来表示。这些角度告诉我们如何将切线空间中的法线向量 $\mathbf{n}$ 变换为射线的方向向量 $\mathbf{u}$。**极角**（polar angle）$\theta$ 描述的是围绕切线空间 $y$ 轴对法线向量进行旋转，使其从竖直方向倾斜开来。<sup>1</sup> **方位角**（azimuthal angle）$\varphi$ 描述的是围绕法线方向（即切线空间 $z$ 轴）对这个新的倾斜向量进行旋转，以对齐到所需的射线方向 $\mathbf{u}$。Figure 12.6 展示了球坐标。
 
 在文献中，常见做法是使用简写符号 $\Theta$ 来表示一对角度 $(\theta,\varphi)$，用以描述一条光线的方向。有些书和文章会避免在这里使用向量记号，因为这个量在严格数学意义上并不是一个向量。不过在本书中，我们会使用向量记号 $\Theta$ 来提醒自己：这个量不是标量，而是一对角度的简写。这样，我们就有了两种方式来描述一条射线的方向：一种是在笛卡尔坐标中使用三维单位方向向量 $\mathbf{u}$，另一种是在球坐标中使用二维的类向量量 $\Theta$。
 
-[^1]: 我们这里使用的是球坐标的所谓**物理约定**（physics convention），其中 $\theta$ 表示法线偏离竖直方向的旋转角。注意不要将其与另一种**数学约定**（mathematics convention）混淆，在后者中 $\theta$ 表示围绕法线的旋转。
+> **脚注 1**：我们这里使用的是球坐标的所谓**物理约定**（physics convention），其中 $\theta$ 表示法线偏离竖直方向的旋转角。注意不要将其与另一种**数学约定**（mathematics convention）混淆，在后者中 $\theta$ 表示围绕法线的旋转。
 
 ![Figure 12.6. A ray direction emanating from a surface point can be expressed in spherical coordinates and written as Θ = (θ, φ). You can think of this rotation as operating on a vector of length r that initially points from the origin upwards along the z axis. This vector is first rotated by θ radians about the y axis to tilt it away from z. It is then rotated by φ radians about the z axis to bring it into its final orientation. The radial component r is taken to be unity and ignored when describing a ray direction.](../../assets/images/volume-02/chapter-12/figure-12-6-ray-direction-spherical-coordinates.png)
 
@@ -107,7 +107,7 @@ $$
 
 不同于单变量微积分中的普通导数，这个导数既不表示斜率，也不表示切线。相反，它是一种来自多变量微积分分支的特殊导数，该分支称为**向量分析**（vector analysis）或**向量微积分**（vector calculus）。向量分析定义了如何在三维空间中的向量场上求导和计算积分。量 $\mathrm{d}A$ 称为**面积微元**（area infinitesimal）或**面积元素**（area element）。它可以被理解为任意无限小的面积——虽然在这个例子中我们将它建模为一个正方形，但只要其面积在极限中趋近于 0，它的实际形状并不重要。
 
-#### Flux 与 Flux Density
+**Flux 与 Flux Density。**
 
 在物理学中，任意量的单位面积流动通常称为**通量**（flux）。这个词来自拉丁语中表示“流动”的词。不过，正如 [Section 11.2.3.1](../chapter-11/README.md#11231-radiant-power) 中提到的，术语 **radiant flux** 有时会与 **radiant power** 交替使用。这会造成很多混淆，因为 radiant power 的单位是瓦特，而不是瓦特每平方米！
 
@@ -260,7 +260,7 @@ $$
 
 需要强调的是，每一个无穷小立体角 $\mathrm{d}\omega_{\Theta}$ 都不可避免地绑定到一个射线方向 $\Theta$。同样，方向 $\Theta$ 上任意一条无穷窄射线，都可以被看作是一个以该方向为中心的立体角 $\mathrm{d}\omega_{\Theta}$ 在其趋近于 0 时的极限。
 
-#### 记号变化
+**记号变化。**
 
 在文献中，你会看到关于微分立体角 $\mathrm{d}\omega_{\Theta}$ 的各种记号。有些文本只使用 $\mathrm{d}\omega$，并隐含地认为这个无穷小量是在某条指向特定方向的射线附近取得的。你也可能看到大写字母 $\mathrm{d}\Omega$ 被用来替代小写形式。还有一些文献会把无穷小立体角表示为向量，例如 $\mathrm{d}\boldsymbol{\omega}$、$\mathrm{d}\vec{\omega}$、$\mathrm{d}\ell$ 或 $\mathrm{d}\mathbf{l}$。
 
@@ -297,11 +297,11 @@ M(\mathbf{x})=B(\mathbf{x})=\int_{\Omega}L(\mathbf{x}\rightarrow\Theta)\cos\thet
 \tag{12.5}
 $$
 
-#### 余弦项的归属
+**余弦项的归属。**
 
 这些方程中的余弦项可以用两种方式理解。它可以归属于面积微元，此时它将面积元素投影到垂直于射线的平面上：$\mathrm{d}A_{\perp}=\cos\theta\,\mathrm{d}A$。它也可以归属于无穷小立体角，此时它计算的是投影立体角 $\mathrm{d}\omega_{\Theta\perp}=\cos\theta\,\mathrm{d}\omega_{\Theta}$。无论我们把它理解为绑定到面积元素，还是绑定到立体角元素，余弦项都必须出现在这些积分中。
 
-#### 球坐标中的无穷小立体角
+**球坐标中的无穷小立体角。**
 
 半球上的积分可以写成对球坐标中两个角度分量 $\theta$ 和 $\varphi$ 的二重积分。例如，Equation (12.5) 可以重写为：
 
